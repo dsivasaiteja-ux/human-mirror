@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Mirror — Connecting Every Human To The Help They Need</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0B1E3D;
+  --navy-mid: #1A3560;
+  --navy-light: #2B4F8C;
+  --green: #2D5A1B;
+  --green-mid: #3A7D23;
+  --green-light: #4CAF30;
+  --green-pale: #EAF2E3;
+  --gold: #8B6914;
+  --gold-light: #C49A2A;
+  --white: #FFFFFF;
+  --off-white: #F7F9FC;
+  --cream: #FAF9F6;
+  --surface: #EFF3F9;
+  --muted: #6B7A99;
+  --text: #0B1E3D;
+  --border: rgba(11,30,61,0.1);
+  --shadow-soft: 0 2px 20px rgba(11,30,61,0.07);
+  --shadow-md: 0 8px 40px rgba(11,30,61,0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  height: 72px;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  justify-content: space-between;
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: var(--shadow-soft); }
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.nav-brand-wrap { display: flex; flex-direction: column; line-height: 1.1; }
+.nav-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+.nav-brand .human { color: var(--navy); }
+.nav-brand .mirror { color: var(--green-mid); }
+.nav-tagline { font-size: 10px; color: var(--muted); letter-spacing: 0.5px; font-weight: 400; }
+
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a { font-size: 14px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--navy); }
+.nav-cta {
+  background: var(--navy) !important;
+  color: var(--white) !important;
+  padding: 10px 22px !important;
+  border-radius: 50px !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--navy-mid) !important; }
+.nav-emergency {
+  background: #DC2626 !important;
+  color: var(--white) !important;
+  padding: 10px 20px !important;
+  border-radius: 50px !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  animation: pulse-red 2s infinite;
+}
+@keyframes pulse-red { 0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0.3)} 50%{box-shadow:0 0 0 6px rgba(220,38,38,0)} }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 130px 24px 80px;
+  position: relative; overflow: hidden;
+  background: var(--cream);
+}
+.hero-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.hero-circle-1 { position: absolute; top: -200px; right: -200px; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(58,125,35,0.05) 0%, transparent 70%); }
+.hero-circle-2 { position: absolute; bottom: -250px; left: -250px; width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(11,30,61,0.04) 0%, transparent 70%); }
+.hero-dots { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(11,30,61,0.06) 1px, transparent 1px); background-size: 44px 44px; opacity: 0.5; }
+
+.hero-content { position: relative; z-index: 1; max-width: 840px; }
+
+/* HERO LOGO — the real frozen logo, large and proud */
+.hero-logo-wrap {
+  margin-bottom: 36px;
+  display: inline-block;
+  animation: fadeUp 0.9s ease both;
+}
+.hero-logo-img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: drop-shadow(0 8px 32px rgba(11,30,61,0.12));
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--green-pale);
+  color: var(--green);
+  font-size: 11px; font-weight: 500;
+  padding: 6px 18px;
+  border-radius: 50px;
+  border: 1px solid rgba(58,125,35,0.18);
+  margin-bottom: 24px;
+  animation: fadeUp 0.9s 0.1s ease both;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-light); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(36px, 5.5vw, 68px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  color: var(--navy);
+  margin-bottom: 24px;
+  animation: fadeUp 0.9s 0.2s ease both;
+}
+.hero h1 em { font-style: italic; color: var(--green-mid); font-weight: 300; }
+
+/* REFLECT. LEARN. IMPROVE. tagline from logo */
+.hero-tagline-strip {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  margin-bottom: 20px;
+  animation: fadeUp 0.9s 0.25s ease both;
+}
+.hero-tagline-strip span {
+  font-size: 12px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
+}
+.hero-tagline-strip .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold-light); }
+
+.hero-sub {
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--muted); line-height: 1.7;
+  max-width: 560px; margin: 0 auto 48px;
+  font-weight: 300;
+  animation: fadeUp 0.9s 0.3s ease both;
+}
+
+/* SEARCH */
+.search-container { width: 100%; max-width: 660px; margin: 0 auto; animation: fadeUp 0.9s 0.4s ease both; }
+.search-box {
+  display: flex; align-items: center;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 6px 6px 28px;
+  box-shadow: var(--shadow-md);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  gap: 12px;
+}
+.search-box:focus-within { border-color: var(--green-mid); box-shadow: var(--shadow-md), 0 0 0 4px rgba(58,125,35,0.1); }
+.search-icon { width: 20px; height: 20px; color: var(--muted); flex-shrink: 0; }
+.search-input { flex: 1; border: none; outline: none; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 300; color: var(--navy); background: transparent; padding: 10px 0; min-width: 0; }
+.search-input::placeholder { color: rgba(107,122,153,0.65); }
+.search-btn { background: var(--navy); color: var(--white); border: none; border-radius: 50px; padding: 14px 32px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: background 0.2s, transform 0.15s; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+.search-btn:hover { background: var(--navy-mid); transform: scale(1.02); }
+.search-examples { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.example-chip { background: var(--white); color: var(--muted); font-size: 13px; font-weight: 400; padding: 7px 16px; border-radius: 50px; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-soft); }
+.example-chip:hover { background: var(--navy); color: var(--white); border-color: var(--navy); transform: translateY(-1px); }
+.location-hint { margin-top: 16px; font-size: 12px; color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 6px; }
+.location-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-light); animation: blink 2s infinite; }
+
+/* TRUST BAR */
+.trust-bar { padding: 26px 40px; background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; gap: 44px; flex-wrap: wrap; }
+.trust-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+.trust-item svg { width: 18px; height: 18px; color: var(--green-mid); flex-shrink: 0; }
+.trust-divider { width: 1px; height: 18px; background: var(--border); }
+
+/* STATS */
+.stats-section { padding: 80px 40px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.stat-card { text-align: center; padding: 40px 24px; background: var(--cream); border-radius: var(--radius); border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; }
+.stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.stat-num { font-family: 'Fraunces', serif; font-size: 48px; font-weight: 600; color: var(--navy); letter-spacing: -2px; line-height: 1; margin-bottom: 8px; }
+.stat-num span { color: var(--green-mid); }
+.stat-label { font-size: 14px; color: var(--muted); }
+
+/* SECTION HEADER */
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-tag { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 16px; }
+.section-title { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 600; color: var(--navy); letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 16px; }
+.section-title em { font-style: italic; color: var(--green-mid); font-weight: 300; }
+.section-desc { font-size: 17px; color: var(--muted); max-width: 520px; margin: 0 auto; line-height: 1.65; font-weight: 300; }
+
+/* CATEGORIES */
+.categories-section { padding: 80px 40px; background: var(--white); max-width: 1200px; margin: 0 auto; }
+.categories-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.category-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 20px; cursor: pointer; transition: all 0.25s; text-align: left; position: relative; overflow: hidden; text-decoration: none; display: block; }
+.category-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--cat-color, var(--green-mid)); transform: scaleX(0); transition: transform 0.25s; transform-origin: left; }
+.category-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: transparent; }
+.category-card:hover::before { transform: scaleX(1); }
+.cat-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 22px; background: var(--cat-bg, var(--green-pale)); }
+.cat-name { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+.cat-count { font-size: 12px; color: var(--muted); }
+
+/* HOW IT WORKS */
+.how-section { padding: 80px 40px; background: var(--navy); color: var(--white); overflow: hidden; position: relative; }
+.how-section .section-tag { color: rgba(76,175,48,0.9); }
+.how-section .section-title { color: var(--white); }
+.how-section .section-desc { color: rgba(255,255,255,0.5); }
+.how-bg { position: absolute; inset: 0; background-image: radial-gradient(circle at 80% 50%, rgba(58,125,35,0.08) 0%, transparent 60%), radial-gradient(circle at 20% 80%, rgba(255,255,255,0.02) 0%, transparent 50%); pointer-events: none; }
+.how-steps { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; z-index: 1; }
+.step-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 32px 24px; transition: background 0.2s; }
+.step-card:hover { background: rgba(255,255,255,0.09); }
+.step-num { font-family: 'Fraunces', serif; font-size: 52px; font-weight: 600; color: rgba(255,255,255,0.07); line-height: 1; margin-bottom: 16px; letter-spacing: -2px; }
+.step-icon { width: 48px; height: 48px; background: rgba(58,125,35,0.25); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 20px; }
+.step-title { font-size: 17px; font-weight: 500; color: var(--white); margin-bottom: 10px; }
+.step-desc { font-size: 14px; color: rgba(255,255,255,0.48); line-height: 1.65; font-weight: 300; }
+
+/* LOCATION */
+.location-section { padding: 80px 40px; background: var(--off-white); }
+.location-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.location-visual { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
+.map-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #EFF3F9 0%, #EAF2E3 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; position: relative; overflow: hidden; }
+.map-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(11,30,61,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(11,30,61,0.05) 1px, transparent 1px); background-size: 40px 40px; }
+.map-pins { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.map-icon { font-size: 52px; filter: drop-shadow(0 4px 16px rgba(58,125,35,0.3)); }
+.map-label { font-size: 14px; font-weight: 500; color: var(--navy); background: var(--white); padding: 7px 18px; border-radius: 50px; box-shadow: var(--shadow-soft); }
+.location-resources { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+.resource-pill { display: flex; align-items: center; justify-content: space-between; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; transition: all 0.2s; cursor: pointer; }
+.resource-pill:hover { border-color: var(--green-mid); box-shadow: var(--shadow-soft); transform: translateX(4px); }
+.resource-info { display: flex; align-items: center; gap: 12px; }
+.resource-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.resource-name { font-size: 14px; font-weight: 500; color: var(--navy); }
+.resource-type { font-size: 12px; color: var(--muted); }
+.resource-action { font-size: 12px; color: var(--green-mid); font-weight: 500; white-space: nowrap; }
+
+/* AI SECTION */
+.ai-section { padding: 80px 40px; background: var(--white); max-width: 1200px; margin: 0 auto; }
+.ai-inner { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); border-radius: 24px; padding: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; overflow: hidden; }
+.ai-bg-glow { position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(58,125,35,0.15) 0%, transparent 70%); pointer-events: none; }
+.ai-content { position: relative; z-index: 1; }
+.ai-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(76,175,48,0.9); margin-bottom: 20px; }
+.ai-title { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 600; color: var(--white); letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 16px; }
+.ai-title em { font-style: italic; font-weight: 300; color: rgba(76,175,48,0.9); }
+.ai-desc { font-size: 16px; color: rgba(255,255,255,0.52); line-height: 1.65; font-weight: 300; margin-bottom: 32px; }
+.ai-features { display: flex; flex-direction: column; gap: 12px; }
+.ai-feat { display: flex; align-items: center; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.72); }
+.ai-feat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-light); flex-shrink: 0; }
+.ai-demo { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 28px; position: relative; z-index: 1; }
+.ai-chat { display: flex; flex-direction: column; gap: 16px; }
+.chat-msg { display: flex; gap: 12px; align-items: flex-start; }
+.chat-msg.user { flex-direction: row-reverse; }
+.chat-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.chat-msg.ai .chat-avatar { background: rgba(58,125,35,0.3); }
+.chat-msg.user .chat-avatar { background: rgba(255,255,255,0.12); }
+.chat-bubble { padding: 12px 16px; border-radius: 14px; font-size: 13px; line-height: 1.55; max-width: 260px; }
+.chat-msg.ai .chat-bubble { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); border-radius: 4px 14px 14px 14px; }
+.chat-msg.user .chat-bubble { background: var(--green-mid); color: var(--white); border-radius: 14px 4px 14px 14px; }
+.chat-typing { display: flex; gap: 4px; padding: 14px 16px; background: rgba(255,255,255,0.08); border-radius: 4px 14px 14px 14px; width: fit-content; }
+.typing-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); animation: typingBounce 1.4s infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce { 0%,60%,100%{transform:translateY(0);opacity:0.4} 30%{transform:translateY(-6px);opacity:1} }
+
+/* EMERGENCY */
+.emergency-section { padding: 40px; background: #FFF5F5; border-top: 1px solid #FED7D7; border-bottom: 1px solid #FED7D7; }
+.emergency-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.emergency-left { display: flex; align-items: center; gap: 16px; }
+.emergency-icon { width: 52px; height: 52px; background: #DC2626; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; animation: pulse-red 2s infinite; flex-shrink: 0; }
+.emergency-title { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; color: #991B1B; margin-bottom: 4px; }
+.emergency-desc { font-size: 14px; color: #B91C1C; font-weight: 300; }
+.emergency-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.emergency-btn { background: #DC2626; color: var(--white); border: none; border-radius: 50px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+.emergency-btn:hover { background: #B91C1C; transform: scale(1.02); }
+.emergency-btn.outline { background: transparent; border: 1.5px solid #DC2626; color: #DC2626; }
+.emergency-btn.outline:hover { background: #FEE2E2; }
+
+/* GLOBAL */
+.global-section { padding: 80px 40px; background: var(--off-white); }
+.global-inner { max-width: 1100px; margin: 0 auto; }
+.regions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+.region-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; transition: all 0.2s; cursor: pointer; }
+.region-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.region-flag { font-size: 32px; margin-bottom: 12px; }
+.region-name { font-size: 16px; font-weight: 500; color: var(--navy); margin-bottom: 6px; }
+.region-desc { font-size: 13px; color: var(--muted); margin-bottom: 16px; line-height: 1.55; font-weight: 300; }
+.region-services { display: flex; flex-wrap: wrap; gap: 6px; }
+.service-tag { font-size: 11px; padding: 4px 10px; border-radius: 50px; background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
+
+/* ROADMAP */
+.roadmap-section { padding: 80px 40px; background: var(--white); max-width: 1200px; margin: 0 auto; }
+.roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.roadmap-card { border-radius: var(--radius); padding: 36px 28px; border: 1px solid var(--border); }
+.roadmap-card.mvp { background: var(--green-pale); border-color: rgba(58,125,35,0.2); }
+.roadmap-card.year1 { background: var(--cream); }
+.roadmap-card.year5 { background: var(--navy); border-color: var(--navy); }
+.roadmap-phase { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+.roadmap-card.mvp .roadmap-phase { color: var(--green); }
+.roadmap-card.year1 .roadmap-phase { color: var(--muted); }
+.roadmap-card.year5 .roadmap-phase { color: rgba(76,175,48,0.9); }
+.roadmap-title { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; margin-bottom: 20px; letter-spacing: -0.5px; color: var(--navy); }
+.roadmap-card.year5 .roadmap-title { color: var(--white); }
+.roadmap-items { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.roadmap-items li { font-size: 14px; font-weight: 300; display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+.roadmap-card.mvp .roadmap-items li { color: var(--green); }
+.roadmap-card.year1 .roadmap-items li { color: var(--muted); }
+.roadmap-card.year5 .roadmap-items li { color: rgba(255,255,255,0.68); }
+.roadmap-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.roadmap-card.mvp .roadmap-dot { background: var(--green-mid); }
+.roadmap-card.year1 .roadmap-dot { background: var(--muted); }
+.roadmap-card.year5 .roadmap-dot { background: rgba(76,175,48,0.9); }
+
+/* VOLUNTEER */
+.volunteer-section { padding: 80px 40px; background: var(--off-white); }
+.volunteer-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+.volunteer-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+.vol-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 24px; text-align: left; transition: all 0.2s; }
+.vol-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.vol-icon { font-size: 32px; margin-bottom: 16px; }
+.vol-title { font-size: 16px; font-weight: 500; color: var(--navy); margin-bottom: 8px; }
+.vol-desc { font-size: 13px; color: var(--muted); line-height: 1.55; font-weight: 300; }
+.vol-link { display: inline-block; margin-top: 16px; font-size: 13px; color: var(--green-mid); font-weight: 500; text-decoration: none; }
+.vol-link:hover { text-decoration: underline; }
+
+/* LOGO RIBBON — shows the real logo centered with its tagline */
+.logo-ribbon {
+  padding: 60px 40px;
+  background: var(--cream);
+  text-align: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.logo-ribbon-inner { max-width: 400px; margin: 0 auto; }
+.logo-ribbon img { width: 140px; height: 140px; object-fit: contain; border-radius: 50%; margin-bottom: 16px; filter: drop-shadow(0 4px 20px rgba(11,30,61,0.10)); }
+.logo-ribbon-rli { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); font-weight: 400; margin-bottom: 8px; }
+.logo-ribbon-tagline { font-size: 15px; color: var(--navy); font-weight: 300; }
+.gold-line { width: 40px; height: 1px; background: var(--gold-light); margin: 12px auto; }
+
+/* CTA BANNER */
+.cta-section { padding: 80px 40px; background: var(--navy); text-align: center; position: relative; overflow: hidden; }
+.cta-bg { position: absolute; inset: 0; background-image: radial-gradient(circle at 50% 50%, rgba(58,125,35,0.1) 0%, transparent 65%); pointer-events: none; }
+.cta-content { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+.cta-logo { width: 80px; height: 80px; object-fit: contain; border-radius: 50%; margin-bottom: 24px; opacity: 0.9; }
+.cta-title { font-family: 'Fraunces', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 600; color: var(--white); letter-spacing: -2px; margin-bottom: 20px; line-height: 1.1; }
+.cta-title em { font-style: italic; color: rgba(76,175,48,0.9); font-weight: 300; }
+.cta-sub { font-size: 17px; color: rgba(255,255,255,0.48); font-weight: 300; margin-bottom: 40px; line-height: 1.65; }
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary { background: var(--green-mid); color: var(--white); border: none; border-radius: 50px; padding: 16px 36px; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+.btn-primary:hover { background: var(--green); transform: scale(1.02); }
+.btn-outline { background: transparent; color: rgba(255,255,255,0.65); border: 1.5px solid rgba(255,255,255,0.18); border-radius: 50px; padding: 16px 36px; font-family: 'DM Sans', sans-serif; font-size: 16px; cursor: pointer; transition: all 0.2s; }
+.btn-outline:hover { border-color: rgba(255,255,255,0.45); color: var(--white); }
+
+/* FOOTER */
+footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 64px 40px 40px; }
+.footer-top { max-width: 1200px; margin: 0 auto 48px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; }
+.footer-brand-logo { width: 64px; height: 64px; object-fit: contain; border-radius: 50%; margin-bottom: 16px; }
+.footer-brand-name { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+.footer-brand-name span { color: var(--green-light); }
+.footer-brand-rli { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 14px; }
+.footer-tagline { font-size: 14px; color: rgba(255,255,255,0.42); line-height: 1.65; font-weight: 300; max-width: 240px; margin-bottom: 24px; }
+.footer-links-title { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.28); margin-bottom: 16px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { color: rgba(255,255,255,0.52); text-decoration: none; font-size: 14px; font-weight: 300; transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+.footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-copy { font-size: 13px; font-weight: 300; }
+.footer-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+.footer-badge { font-size: 11px; padding: 5px 12px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.38); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .categories-grid { grid-template-columns: repeat(3, 1fr); }
+  .stats-section { grid-template-columns: repeat(2, 1fr); }
+  .how-steps { grid-template-columns: repeat(2, 1fr); }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .roadmap-grid { grid-template-columns: 1fr; }
+  .volunteer-cards { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero { padding: 110px 20px 60px; }
+  .hero-logo-img { width: 130px; height: 130px; }
+  .categories-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-section { padding: 60px 20px; grid-template-columns: repeat(2, 1fr); }
+  .location-inner { grid-template-columns: 1fr; gap: 40px; }
+  .ai-inner { grid-template-columns: 1fr; padding: 40px 28px; gap: 40px; }
+  .regions-grid { grid-template-columns: 1fr; }
+  .how-steps { grid-template-columns: 1fr; }
+  .trust-bar { padding: 20px; gap: 20px; }
+  .trust-divider { display: none; }
+  .emergency-inner { flex-direction: column; align-items: flex-start; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .volunteer-cards { grid-template-columns: 1fr; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+  .how-section, .location-section, .ai-section, .global-section,
+  .categories-section, .roadmap-section, .volunteer-section, .cta-section { padding: 60px 20px; }
+  footer { padding: 48px 20px 32px; }
+  .ai-title { font-size: 28px; }
+}
+@media (max-width: 480px) {
+  .categories-grid { grid-template-columns: 1fr 1fr; }
+  .stats-section { grid-template-columns: 1fr 1fr; }
+  .search-box { border-radius: 18px; padding: 12px 16px; flex-direction: column; gap: 8px; }
+  .search-btn { width: 100%; justify-content: center; }
+  .footer-top { grid-template-columns: 1fr; }
+  .hero-logo-img { width: 110px; height: 110px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img
+      class="nav-logo-img"
+      src="/mnt/user-data/uploads/DDE86F37-3F4E-4B46-B6D4-4A31141B8032.jpeg"
+      alt="Human Mirror Logo"
+    />
+    <div class="nav-brand-wrap">
+      <div class="nav-brand"><span class="human">HUMAN </span><span class="mirror">MIRROR</span></div>
+      <div class="nav-tagline">Reflect. Learn. Improve.</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#location">Near You</a></li>
+    <li><a href="#global">Global</a></li>
+    <li><a href="#emergency" class="nav-emergency">🚨 Emergency</a></li>
+    <li><a href="#hero" class="nav-cta">Get Help Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-dots"></div>
+    <div class="hero-circle-1"></div>
+    <div class="hero-circle-2"></div>
+  </div>
+  <div class="hero-content">
+
+    <!-- THE FROZEN LOGO — large, centred, proud -->
+    <div class="hero-logo-wrap">
+      <img
+        class="hero-logo-img"
+        src="/mnt/user-data/uploads/DDE86F37-3F4E-4B46-B6D4-4A31141B8032.jpeg"
+        alt="Human Mirror — Reflect. Learn. Improve."
+      />
+    </div>
+
+    <!-- Tagline from the logo -->
+    <div class="hero-tagline-strip">
+      <span>Reflect</span><div class="dot"></div>
+      <span>Learn</span><div class="dot"></div>
+      <span>Improve</span>
+    </div>
+
+    <div class="hero-badge">Global Digital Public Service Platform</div>
+
+    <h1>Connecting <em>Every Human</em><br>To The Help They Need.</h1>
+
+    <p class="hero-sub">Find trusted support, resources, guidance, protection, education, and opportunities — wherever you are in the world.</p>
+
+    <div class="search-container">
+      <div class="search-box" id="searchBox">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Describe your situation or what you need help with..." aria-label="Search for help"/>
+        <button class="search-btn" id="searchBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          Find Help
+        </button>
+      </div>
+      <div class="search-examples">
+        <span class="example-chip" data-query="I need mental health support">Mental Health</span>
+        <span class="example-chip" data-query="I lost my job and need help">Lost My Job</span>
+        <span class="example-chip" data-query="Child protection resources">Child Safety</span>
+        <span class="example-chip" data-query="Legal rights guidance">Legal Rights</span>
+        <span class="example-chip" data-query="I am struggling with addiction">Addiction Help</span>
+        <span class="example-chip" data-query="Women safety resources near me">Women Safety</span>
+      </div>
+      <div class="location-hint">
+        <div class="location-dot"></div>
+        <span id="locationText">Detecting your location to show relevant local resources...</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar reveal">
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Private &amp; Confidential
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    Verified Resources Only
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    Available 24/7
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Location-Aware
+  </div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    Free for Everyone
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stat-card reveal">
+    <div class="stat-num">195<span>+</span></div>
+    <div class="stat-label">Countries Covered</div>
+  </div>
+  <div class="stat-card reveal" style="transition-delay:0.08s">
+    <div class="stat-num">50<span>K+</span></div>
+    <div class="stat-label">Verified Resources</div>
+  </div>
+  <div class="stat-card reveal" style="transition-delay:0.16s">
+    <div class="stat-num">10<span>+</span></div>
+    <div class="stat-label">Help Categories</div>
+  </div>
+  <div class="stat-card reveal" style="transition-delay:0.24s">
+    <div class="stat-num">24<span>/7</span></div>
+    <div class="stat-label">AI-Powered Guidance</div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories-section" id="categories">
+  <div class="section-header reveal">
+    <div class="section-tag">Help Categories</div>
+    <h2 class="section-title">Whatever you're facing,<br><em>we have a path forward.</em></h2>
+    <p class="section-desc">Ten essential areas of human need, each with verified resources, expert guidance, and community support.</p>
+  </div>
+  <div class="categories-grid">
+    <a href="#" class="category-card" style="--cat-color:#DC2626;--cat-bg:#FFF5F5;">
+      <div class="cat-icon">🛡️</div>
+      <div class="cat-name">Child Protection</div>
+      <div class="cat-count">2,400+ resources</div>
+    </a>
+    <a href="#" class="category-card" style="--cat-color:#DB2777;--cat-bg:#FDF2F8;">
+      <div class="cat-icon">💜</div>
+      <div class="cat-name">Women Safety</div>
+      <div class="cat-count">1,800+ resources</div>
+    </a>
+    <a href="#" class="category-card" style="--cat-color:#7C3AED;--cat-bg:#F5F3FF;">
+      <div class="cat-icon">🧠</div>
+      <div class="cat-name">Mental Health</div>
+      <div class="cat-count">3,200+ resources</div>
+    </a>
+    <a href="#" class="category-card" style="--cat-color:#2563EB;--cat-bg:#EFF6FF;">
+      <div class="cat-icon">📚</div>
+      <div class="cat-name">Education</div>
+      <div class="cat-count">5,000+ resources</div>
+    </a>
+    <a href="#" class="category-card" style="--cat-color:#0D9488;--cat-bg:#F0FDFA;">
+      <div class="cat-icon">💼</div>
+      <div class="cat-name">Career Guidance</div>
+      <div class="cat-count">2,100+ resources</div>
+    </a>
+    <a href="#" class="category-card" style="--cat-color:#D97706;--cat-bg:#FFFBEB;">
+      <div class="cat-icon">⚖️</div>
+      <div class="cat-name">Legal Rights</div>
+      <div class="cat-count">1,500+ resources</div>
+    </a>
+    <a href="#" class="category-card" style="--cat-color:#0284C7;--cat-bg:#F0F9FF;">
+      <div class="cat-icon">🔒</div>
+      <div class="cat-name">Cyber Safety</div>
+      <div class="cat-count">900+ resources</div>
+    </a>
+    <a href="#" class="category-card" style="--cat-color:#16A34A;--cat-bg:#F0FDF4;">
+      <div class="cat-icon">🌱</div>
+      <div class="cat-name">Addiction Recovery</div>
+      <div class="cat-count">1,200+ resources</div>
+    </a>
+    <a href="#" class="category-card" style="--cat-color:#8B6914;--cat-bg:#FEFCE8;">
+      <div class="cat-icon">🌟</div>
+      <div class="cat-name">Human Values</div>
+      <div class="cat-count">800+ resources</div>
+    </a>
+    <a href="#" class="category-card" style="--cat-color:#3A7D23;--cat-bg:#EAF2E3;">
+      <div class="cat-icon">🤝</div>
+      <div class="cat-name">Community Resources</div>
+      <div class="cat-count">4,600+ resources</div>
+    </a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="how-bg"></div>
+  <div class="section-header reveal">
+    <div class="section-tag">How It Works</div>
+    <h2 class="section-title">From confusion <em>to clarity</em><br>in minutes.</h2>
+    <p class="section-desc">Human Mirror guides you step by step from your problem to the right solution.</p>
+  </div>
+  <div class="how-steps">
+    <div class="step-card reveal">
+      <div class="step-num">01</div>
+      <div class="step-icon">🔍</div>
+      <div class="step-title">Describe Your Situation</div>
+      <div class="step-desc">Type what you're going through in your own words. No judgment. No forms. Just tell us what's happening.</div>
+    </div>
+    <div class="step-card reveal" style="transition-delay:0.1s">
+      <div class="step-num">02</div>
+      <div class="step-icon">📍</div>
+      <div class="step-title">We Detect Your Location</div>
+      <div class="step-desc">Human Mirror identifies your country, region, and city to surface locally relevant, verified resources automatically.</div>
+    </div>
+    <div class="step-card reveal" style="transition-delay:0.2s">
+      <div class="step-num">03</div>
+      <div class="step-icon">🤖</div>
+      <div class="step-title">AI Navigates For You</div>
+      <div class="step-desc">Our AI Problem Navigation Engine understands your needs and matches you to the right resources with empathy.</div>
+    </div>
+    <div class="step-card reveal" style="transition-delay:0.3s">
+      <div class="step-num">04</div>
+      <div class="step-icon">💛</div>
+      <div class="step-title">Connect &amp; Get Help</div>
+      <div class="step-desc">Direct contact to helplines, counselors, government services, NGOs, and community support near you.</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="location-inner">
+    <div class="reveal">
+      <div class="section-header" style="text-align:left;margin-bottom:32px;">
+        <div class="section-tag">Near You</div>
+        <h2 class="section-title" style="font-size:36px;">Help that knows<br><em>where you are.</em></h2>
+        <p class="section-desc" style="margin:0;text-align:left;max-width:100%;">Human Mirror is location-intelligent. It automatically surfaces emergency contacts, helplines, and services specific to your country, state, and city.</p>
+      </div>
+      <div class="location-resources">
+        <div class="resource-pill">
+          <div class="resource-info">
+            <div class="resource-dot" style="background:#DC2626;"></div>
+            <div><div class="resource-name">Childline — 1098</div><div class="resource-type">Child Protection • India</div></div>
+          </div>
+          <div class="resource-action">Call Now →</div>
+        </div>
+        <div class="resource-pill">
+          <div class="resource-info">
+            <div class="resource-dot" style="background:#7C3AED;"></div>
+            <div><div class="resource-name">iCall Mental Health Helpline</div><div class="resource-type">Mental Health • India</div></div>
+          </div>
+          <div class="resource-action">Connect →</div>
+        </div>
+        <div class="resource-pill">
+          <div class="resource-info">
+            <div class="resource-dot" style="background:#DB2777;"></div>
+            <div><div class="resource-name">Women Helpline — 181</div><div class="resource-type">Women Safety • India</div></div>
+          </div>
+          <div class="resource-action">Call Now →</div>
+        </div>
+        <div class="resource-pill">
+          <div class="resource-info">
+            <div class="resource-dot" style="background:#0284C7;"></div>
+            <div><div class="resource-name">Cybercrime Portal — 1930</div><div class="resource-type">Cyber Safety • India</div></div>
+          </div>
+          <div class="resource-action">Visit →</div>
+        </div>
+      </div>
+    </div>
+    <div class="location-visual reveal">
+      <div class="map-placeholder">
+        <div class="map-grid"></div>
+        <div class="map-pins">
+          <div class="map-icon">🌏</div>
+          <div class="map-label">📍 Resources Near You</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<section class="ai-section" id="ai">
+  <div class="ai-inner reveal">
+    <div class="ai-bg-glow"></div>
+    <div class="ai-content">
+      <div class="ai-tag">✦ AI-Powered Navigation Engine</div>
+      <h2 class="ai-title">You don't have to<br><em>figure it out alone.</em></h2>
+      <p class="ai-desc">Our AI Problem Navigation Engine understands human situations with empathy and precision — guiding you to the right help, even when you don't know what you need.</p>
+      <div class="ai-features">
+        <div class="ai-feat"><div class="ai-feat-dot"></div>Understands complex, emotional situations</div>
+        <div class="ai-feat"><div class="ai-feat-dot"></div>Multi-language support across 40+ languages</div>
+        <div class="ai-feat"><div class="ai-feat-dot"></div>Recommends verified, location-specific resources</div>
+        <div class="ai-feat"><div class="ai-feat-dot"></div>Private, confidential — no data stored</div>
+        <div class="ai-feat"><div class="ai-feat-dot"></div>Available 24 hours, 7 days a week</div>
+      </div>
+    </div>
+    <div class="ai-demo">
+      <div class="ai-chat">
+        <div class="chat-msg user">
+          <div class="chat-avatar">👤</div>
+          <div class="chat-bubble">My daughter is being bullied at school and I don't know what to do.</div>
+        </div>
+        <div class="chat-msg ai">
+          <div class="chat-avatar">🌿</div>
+          <div class="chat-bubble">I understand how distressing this must feel. You're doing the right thing by seeking help. Can I ask — has this been physical or emotional bullying?</div>
+        </div>
+        <div class="chat-msg user">
+          <div class="chat-avatar">👤</div>
+          <div class="chat-bubble">Mostly emotional — name calling and exclusion.</div>
+        </div>
+        <div class="chat-msg ai">
+          <div class="chat-avatar">🌿</div>
+          <div class="chat-bubble">Based on your location, here are 3 verified resources that can help you right now...</div>
+        </div>
+        <div class="chat-msg ai">
+          <div class="chat-avatar"></div>
+          <div class="chat-typing">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCY -->
+<section class="emergency-section" id="emergency">
+  <div class="emergency-inner">
+    <div class="emergency-left">
+      <div class="emergency-icon">🚨</div>
+      <div>
+        <div class="emergency-title">In Immediate Danger?</div>
+        <div class="emergency-desc">If you or someone you know is in immediate danger, contact emergency services now. Don't wait.</div>
+      </div>
+    </div>
+    <div class="emergency-actions">
+      <button class="emergency-btn">🚨 Emergency SOS</button>
+      <button class="emergency-btn outline">Find Local Emergency Numbers</button>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL -->
+<section class="global-section" id="global">
+  <div class="global-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Global Reach</div>
+      <h2 class="section-title">One platform.<br><em>Every country.</em> Every human.</h2>
+      <p class="section-desc">Human Mirror is designed from day one to serve every nation, every community, and every person on Earth.</p>
+    </div>
+    <div class="regions-grid">
+      <div class="region-card reveal">
+        <div class="region-flag">🇮🇳</div>
+        <div class="region-name">India</div>
+        <div class="region-desc">Childline, NIMHANS, iCall, Cybercrime portal, Women helplines, District Legal Services</div>
+        <div class="region-services">
+          <span class="service-tag">Child Safety</span><span class="service-tag">Mental Health</span><span class="service-tag">Legal Aid</span><span class="service-tag">Cyber Safety</span>
+        </div>
+      </div>
+      <div class="region-card reveal" style="transition-delay:0.1s">
+        <div class="region-flag">🇦🇪</div>
+        <div class="region-name">United Arab Emirates</div>
+        <div class="region-desc">Ministry of Community Development, EWAA shelters, Watani programme, Government digital services</div>
+        <div class="region-services">
+          <span class="service-tag">Family Services</span><span class="service-tag">Social Support</span><span class="service-tag">Legal Rights</span>
+        </div>
+      </div>
+      <div class="region-card reveal" style="transition-delay:0.2s">
+        <div class="region-flag">🇺🇸</div>
+        <div class="region-name">United States</div>
+        <div class="region-desc">211 helpline network, SAMHSA, NAMI, local shelters, government benefit locator, crisis text lines</div>
+        <div class="region-services">
+          <span class="service-tag">211 Network</span><span class="service-tag">Mental Health</span><span class="service-tag">Benefits</span><span class="service-tag">Housing</span>
+        </div>
+      </div>
+      <div class="region-card reveal" style="transition-delay:0.3s">
+        <div class="region-flag">🌍</div>
+        <div class="region-name">Sub-Saharan Africa</div>
+        <div class="region-desc">UNICEF country offices, local NGO networks, mobile-first resources, SMS-based helplines</div>
+        <div class="region-services">
+          <span class="service-tag">Offline Access</span><span class="service-tag">SMS Help</span><span class="service-tag">NGO Network</span>
+        </div>
+      </div>
+      <div class="region-card reveal" style="transition-delay:0.4s">
+        <div class="region-flag">🇬🇧</div>
+        <div class="region-name">United Kingdom</div>
+        <div class="region-desc">NHS mental health, Citizens Advice, Childline UK, Refuge, Samaritans, gov.uk services</div>
+        <div class="region-services">
+          <span class="service-tag">NHS Linked</span><span class="service-tag">Citizens Advice</span><span class="service-tag">Crisis Lines</span>
+        </div>
+      </div>
+      <div class="region-card reveal" style="transition-delay:0.5s">
+        <div class="region-flag">🌐</div>
+        <div class="region-name">+ 190 More Countries</div>
+        <div class="region-desc">Expanding resource database covering every nation. Local partnerships being established globally.</div>
+        <div class="region-services">
+          <span class="service-tag">Always Growing</span><span class="service-tag">195 Nations</span><span class="service-tag">Open Platform</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap-section" id="roadmap">
+  <div class="section-header reveal">
+    <div class="section-tag">Platform Roadmap</div>
+    <h2 class="section-title">Building <em>global infrastructure</em><br>for humanity.</h2>
+    <p class="section-desc">A phased approach to becoming the world's most trusted human assistance platform.</p>
+  </div>
+  <div class="roadmap-grid reveal">
+    <div class="roadmap-card mvp">
+      <div class="roadmap-phase">Phase 1 — MVP</div>
+      <div class="roadmap-title">Foundation</div>
+      <ul class="roadmap-items">
+        <li><div class="roadmap-dot"></div>AI-powered search &amp; problem navigation</li>
+        <li><div class="roadmap-dot"></div>10 core help categories live</li>
+        <li><div class="roadmap-dot"></div>Location-aware resource matching</li>
+        <li><div class="roadmap-dot"></div>India, UAE, USA launch coverage</li>
+        <li><div class="roadmap-dot"></div>Emergency SOS module</li>
+        <li><div class="roadmap-dot"></div>Mobile-responsive platform</li>
+        <li><div class="roadmap-dot"></div>English + 5 regional languages</li>
+      </ul>
+    </div>
+    <div class="roadmap-card year1">
+      <div class="roadmap-phase">Phase 2 — Year 1</div>
+      <div class="roadmap-title">Scale</div>
+      <ul class="roadmap-items">
+        <li><div class="roadmap-dot"></div>50 countries fully onboarded</li>
+        <li><div class="roadmap-dot"></div>Volunteer network launched</li>
+        <li><div class="roadmap-dot"></div>Career mentorship programme</li>
+        <li><div class="roadmap-dot"></div>Mobile app — iOS &amp; Android</li>
+        <li><div class="roadmap-dot"></div>Government service discovery API</li>
+        <li><div class="roadmap-dot"></div>40+ language AI support</li>
+        <li><div class="roadmap-dot"></div>Resource partner integrations</li>
+      </ul>
+    </div>
+    <div class="roadmap-card year5">
+      <div class="roadmap-phase">Phase 3 — 5-Year Vision</div>
+      <div class="roadmap-title">Global Infrastructure</div>
+      <ul class="roadmap-items">
+        <li><div class="roadmap-dot"></div>All 195 countries covered</li>
+        <li><div class="roadmap-dot"></div>UN agency partnerships</li>
+        <li><div class="roadmap-dot"></div>Real-time crisis response network</li>
+        <li><div class="roadmap-dot"></div>Offline SMS mode for low-connectivity</li>
+        <li><div class="roadmap-dot"></div>100+ language AI model</li>
+        <li><div class="roadmap-dot"></div>Predictive resource recommendation</li>
+        <li><div class="roadmap-dot"></div>Global volunteer army of 1M+</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEER -->
+<section class="volunteer-section" id="volunteer">
+  <div class="volunteer-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Join The Mission</div>
+      <h2 class="section-title">Become part of<br><em>something larger.</em></h2>
+      <p class="section-desc">Human Mirror is built by people who believe every human deserves access to the right help. Join us.</p>
+    </div>
+    <div class="volunteer-cards">
+      <div class="vol-card reveal">
+        <div class="vol-icon">🧭</div>
+        <div class="vol-title">Volunteer Guide</div>
+        <div class="vol-desc">Help people navigate the platform in their local language. Make a real difference from wherever you are.</div>
+        <a href="#" class="vol-link">Become a Guide →</a>
+      </div>
+      <div class="vol-card reveal" style="transition-delay:0.1s">
+        <div class="vol-icon">📋</div>
+        <div class="vol-title">Resource Curator</div>
+        <div class="vol-desc">Help us verify and add local resources, helplines, and services for your country or community.</div>
+        <a href="#" class="vol-link">Curate Resources →</a>
+      </div>
+      <div class="vol-card reveal" style="transition-delay:0.2s">
+        <div class="vol-icon">🤝</div>
+        <div class="vol-title">Partner Organisation</div>
+        <div class="vol-desc">NGOs, government bodies, and social enterprises — list your services and reach those who need you most.</div>
+        <a href="#" class="vol-link">Partner With Us →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO RIBBON — brand statement before CTA -->
+<div class="logo-ribbon reveal">
+  <div class="logo-ribbon-inner">
+    <img
+      src="/mnt/user-data/uploads/DDE86F37-3F4E-4B46-B6D4-4A31141B8032.jpeg"
+      alt="Human Mirror Logo"
+    />
+    <div class="logo-ribbon-rli">Reflect. Learn. Improve.</div>
+    <div class="gold-line"></div>
+    <div class="logo-ribbon-tagline">Connecting Every Human To The Help They Need</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-content reveal">
+    <img
+      class="cta-logo"
+      src="/mnt/user-data/uploads/DDE86F37-3F4E-4B46-B6D4-4A31141B8032.jpeg"
+      alt="Human Mirror"
+    />
+    <h2 class="cta-title">The help you need<br>is <em>one search away.</em></h2>
+    <p class="cta-sub">No matter where you are, what you're facing, or what language you speak — Human Mirror is here for you. Free. Always.</p>
+    <div class="cta-buttons">
+      <button class="btn-primary">Find Help Now</button>
+      <button class="btn-outline">Explore All Resources</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <img
+        class="footer-brand-logo"
+        src="/mnt/user-data/uploads/DDE86F37-3F4E-4B46-B6D4-4A31141B8032.jpeg"
+        alt="Human Mirror Logo"
+      />
+      <div class="footer-brand-name">HUMAN <span>MIRROR</span></div>
+      <div class="footer-brand-rli">Reflect. Learn. Improve.</div>
+      <p class="footer-tagline">A Global Digital Public Service Platform connecting every human to the help they need — free, always.</p>
+      <div style="display:flex;gap:12px;margin-top:4px;">
+        <a href="#" style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:14px;text-decoration:none;" aria-label="Instagram">📷</a>
+        <a href="#" style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:14px;text-decoration:none;" aria-label="X">𝕏</a>
+        <a href="#" style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:14px;text-decoration:none;" aria-label="LinkedIn">💼</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-links-title">Get Help</div>
+      <ul class="footer-links">
+        <li><a href="#">Child Protection</a></li>
+        <li><a href="#">Women Safety</a></li>
+        <li><a href="#">Mental Health</a></li>
+        <li><a href="#">Legal Rights</a></li>
+        <li><a href="#">Addiction Recovery</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-links-title">Resources</div>
+      <ul class="footer-links">
+        <li><a href="#">Education</a></li>
+        <li><a href="#">Career Guidance</a></li>
+        <li><a href="#">Cyber Safety</a></li>
+        <li><a href="#">Community</a></li>
+        <li><a href="#">Human Values</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-links-title">Platform</div>
+      <ul class="footer-links">
+        <li><a href="#">How It Works</a></li>
+        <li><a href="#">AI Navigation</a></li>
+        <li><a href="#">Global Coverage</a></li>
+        <li><a href="#">Volunteer</a></li>
+        <li><a href="#">Partner With Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-links-title">Organisation</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Mission</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Accessibility</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Human Mirror. All rights reserved. Reflect. Learn. Improve.</div>
+    <div class="footer-badges">
+      <span class="footer-badge">🔒 SSL Secured</span>
+      <span class="footer-badge">♿ WCAG 2.1 AA</span>
+      <span class="footer-badge">🌍 Global Platform</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Location detection
+const locText = document.getElementById('locationText');
+if ('geolocation' in navigator) {
+  navigator.geolocation.getCurrentPosition(
+    () => { locText.textContent = '📍 Location detected — showing resources relevant to your area.'; locText.style.color = '#3A7D23'; },
+    () => { locText.textContent = '📍 Enable location for hyper-local resources, or browse all countries.'; }
+  );
+} else {
+  locText.textContent = '📍 Browse verified resources from anywhere in the world.';
+}
+
+// Example chips
+document.querySelectorAll('.example-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.getElementById('searchInput').value = chip.getAttribute('data-query');
+    document.getElementById('searchInput').focus();
+  });
+});
+
+// Search
+document.getElementById('searchBtn').addEventListener('click', () => {
+  const q = document.getElementById('searchInput').value.trim();
+  if (q) alert('Searching for: "' + q + '"\n\nThe AI Navigation Engine will route you to the right help on the live platform.');
+});
+document.getElementById('searchInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('searchBtn').click();
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
