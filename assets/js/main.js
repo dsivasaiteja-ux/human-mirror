@@ -1,4 +1,3 @@
-cat > /mnt/user-data/outputs/human-mirror/assets/js/main.js << 'EOF'
 /* ============================================================
    HUMAN MIRROR — MAIN JS v3.0
    ============================================================ */
@@ -176,5 +175,3 @@ cat > /mnt/user-data/outputs/human-mirror/assets/js/main.js << 'EOF'
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); }
   else { init(); }
 })();
-EOF
-echo "main.js: $(wc -c < /mnt/user-data/outputs/human-mirror/assets/js/main.js) bytes"
