@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Human Mirror</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.contact-layout{display:grid;grid-template-columns:1fr 1.6fr;gap:56px;align-items:start;}
+.contact-info{display:flex;flex-direction:column;gap:20px;}
+.contact-block{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;display:flex;gap:16px;align-items:flex-start;transition:all .2s;}
+.contact-block:hover{border-color:var(--green-mid);box-shadow:var(--shadow-soft);}
+.contact-block-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;background:var(--green-pale);}
+.contact-block-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.contact-block-value{font-size:14px;color:var(--muted);font-weight:300;line-height:1.55;}
+.contact-block-value a{color:var(--green-mid);font-weight:400;}
+.social-links{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+.social-link{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;text-decoration:none;transition:all .2s;font-size:13.5px;color:var(--navy);font-weight:400;}
+.social-link:hover{border-color:var(--green-mid);color:var(--green-mid);transform:translateX(3px);}
+.social-link-icon{font-size:18px;}
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-soft);}
+.form-success{display:none;flex-direction:column;align-items:center;text-align:center;padding:48px 32px;gap:14px;}
+.form-success-icon{font-size:56px;}
+.form-success-title{font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:var(--navy);}
+.form-success-desc{font-size:15px;color:var(--muted);font-weight:300;line-height:1.65;max-width:380px;}
+.faq-mini{display:flex;flex-direction:column;gap:10px;}
+.faq-mini-item{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;}
+.faq-mini-q{padding:16px 20px;font-size:14px;font-weight:500;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.faq-mini-q:hover{background:var(--cream);}
+.faq-toggle{color:var(--green-mid);font-size:18px;transition:transform .3s;}
+.faq-mini-item.open .faq-toggle{transform:rotate(45deg);}
+.faq-mini-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s;}
+.faq-mini-item.open .faq-mini-a{max-height:160px;padding:0 20px 16px;}
+.faq-mini-a p{font-size:13.5px;color:var(--muted);line-height:1.65;font-weight:300;}
+.emg-notice{background:#FFF5F5;border:1px solid #FECACA;border-radius:var(--radius);padding:20px 24px;display:flex;align-items:flex-start;gap:14px;margin-bottom:28px;}
+.emg-notice-icon{font-size:22px;flex-shrink:0;}
+.emg-notice-text{font-size:13.5px;color:#991B1B;line-height:1.65;font-weight:300;}
+.emg-notice-text strong{font-weight:600;}
+.emg-notice-text a{color:#DC2626;font-weight:500;}
+@media(max-width:900px){.contact-layout{grid-template-columns:1fr;gap:36px;}}
+@media(max-width:480px){.social-links{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div id="hm-nav"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"><div class="page-hero-dots"></div></div>
+  <div class="page-hero-content">
+    <div class="page-breadcrumb"><a href="index.html">Home</a> › Contact</div>
+    <div class="page-badge">Get In Touch</div>
+    <h1 class="page-title">We're here.<br><em>Talk to us.</em></h1>
+    <p class="page-subtitle">Whether you need help, want to volunteer, wish to partner, or have a question — we want to hear from you. Every message is read by a real person.</p>
+  </div>
+</section>
+
+<section class="section" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="contact-layout">
+
+      <!-- LEFT: INFO -->
+      <div>
+        <div class="emg-notice reveal">
+          <div class="emg-notice-icon">🚨</div>
+          <div class="emg-notice-text"><strong>If you are in immediate danger, do not use this contact form.</strong> Please visit our <a href="emergency.html">Emergency page</a> immediately or call your local emergency number (112 / 911 / 999).</div>
+        </div>
+
+        <div class="section-tag" style="margin-bottom:20px;">Contact Information</div>
+        <div class="contact-info reveal">
+          <div class="contact-block">
+            <div class="contact-block-icon">📧</div>
+            <div>
+              <div class="contact-block-title">General Enquiries</div>
+              <div class="contact-block-value"><a href="mailto:hello@humanmirror.org">hello@humanmirror.org</a><br>We respond within 2 business days</div>
+            </div>
+          </div>
+          <div class="contact-block">
+            <div class="contact-block-icon">🤝</div>
+            <div>
+              <div class="contact-block-title">Partnerships</div>
+              <div class="contact-block-value"><a href="mailto:partners@humanmirror.org">partners@humanmirror.org</a><br>NGOs, governments, institutions, corporations</div>
+            </div>
+          </div>
+          <div class="contact-block">
+            <div class="contact-block-icon">🧭</div>
+            <div>
+              <div class="contact-block-title">Volunteering</div>
+              <div class="contact-block-value"><a href="mailto:volunteer@humanmirror.org">volunteer@humanmirror.org</a><br>Or apply directly on our <a href="volunteer.html">Volunteer page</a></div>
+            </div>
+          </div>
+          <div class="contact-block">
+            <div class="contact-block-icon">📰</div>
+            <div>
+              <div class="contact-block-title">Media & Press</div>
+              <div class="contact-block-value"><a href="mailto:press@humanmirror.org">press@humanmirror.org</a><br>Interviews, features, and press requests</div>
+            </div>
+          </div>
+          <div class="contact-block">
+            <div class="contact-block-icon">🔒</div>
+            <div>
+              <div class="contact-block-title">Privacy & Safety</div>
+              <div class="contact-block-value"><a href="mailto:privacy@humanmirror.org">privacy@humanmirror.org</a><br>Data concerns, safety reports, policy questions</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:32px;" class="reveal">
+          <div class="section-tag" style="margin-bottom:16px;">Follow Human Mirror</div>
+          <div class="social-links">
+            <a href="#" class="social-link"><span class="social-link-icon">📷</span>Instagram</a>
+            <a href="#" class="social-link"><span class="social-link-icon">𝕏</span>X (Twitter)</a>
+            <a href="#" class="social-link"><span class="social-link-icon">💼</span>LinkedIn</a>
+            <a href="#" class="social-link"><span class="social-link-icon">▶️</span>YouTube</a>
+          </div>
+        </div>
+
+        <div style="margin-top:32px;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:24px;" class="reveal">
+          <div style="font-size:14px;font-weight:500;color:var(--navy);margin-bottom:8px;">🕐 Response Times</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.8;font-weight:300;">
+            General enquiries: <strong style="color:var(--navy);">1–2 business days</strong><br>
+            Partnership enquiries: <strong style="color:var(--navy);">3–5 business days</strong><br>
+            Volunteer applications: <strong style="color:var(--navy);">3 business days</strong><br>
+            Press requests: <strong style="color:var(--navy);">Same day when possible</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: FORM -->
+      <div class="reveal">
+        <div class="form-card">
+          <div class="form-success" id="contactSuccess">
+            <div class="form-success-icon">💌</div>
+            <div class="form-success-title">Message Sent!</div>
+            <div class="form-success-desc">Thank you for reaching out to Human Mirror. A real person will read your message and respond within 2 business days.</div>
+            <a href="index.html" class="btn btn-green" style="margin-top:8px;">Back to Home →</a>
+          </div>
+          <form class="hm-form" id="contactForm">
+            <h3 style="font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:var(--navy);margin-bottom:4px;letter-spacing:-0.5px;">Send Us a Message</h3>
+            <p style="font-size:13px;color:var(--muted);margin-bottom:28px;font-weight:300;">Every message is read by a real Human Mirror team member.</p>
+
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">First Name *</label><input class="form-input" type="text" placeholder="Your first name" required></div>
+              <div class="form-group"><label class="form-label">Last Name *</label><input class="form-input" type="text" placeholder="Your last name" required></div>
+            </div>
+            <div class="form-group"><label class="form-label">Email Address *</label><input class="form-input" type="email" placeholder="your@email.com" required></div>
+            <div class="form-group"><label class="form-label">Your Country</label><input class="form-input" type="text" placeholder="Where are you writing from?"></div>
+            <div class="form-group">
+              <label class="form-label">Subject *</label>
+              <select class="form-select" required>
+                <option value="">What is your message about?</option>
+                <option>General Enquiry</option>
+                <option>I need help finding resources</option>
+                <option>Volunteer Application</option>
+                <option>Partnership Enquiry</option>
+                <option>Report an Incorrect Resource</option>
+                <option>Suggest a New Resource</option>
+                <option>Media / Press</option>
+                <option>Technical Issue</option>
+                <option>Feedback or Suggestion</option>
+                <option>Privacy Concern</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Your Message *</label><textarea class="form-textarea" placeholder="Write your message here. Please include as much detail as helpful — the more context you give us, the better we can help you." style="min-height:140px;" required></textarea></div>
+            <div class="form-group" style="display:flex;align-items:flex-start;gap:10px;">
+              <input type="checkbox" id="contact-consent" style="margin-top:3px;flex-shrink:0;" required>
+              <label for="contact-consent" style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.5;">I understand that Human Mirror is a public service platform. My email will only be used to respond to this message and will not be stored or shared.</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">Send Message →</button>
+            <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:14px;font-weight:300;">🔒 Your message is private. We never share your information.</p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background:var(--cream)">
+  <div class="section-inner-narrow">
+    <div class="section-header reveal">
+      <div class="section-tag">Before You Write</div>
+      <h2 class="section-title">Quick answers to<br><em>common questions.</em></h2>
+    </div>
+    <div class="faq-mini reveal">
+      <div class="faq-mini-item">
+        <div class="faq-mini-q">Is Human Mirror free to use? <span class="faq-toggle">+</span></div>
+        <div class="faq-mini-a"><p>Yes. Human Mirror is completely free for every user, everywhere in the world. There are no fees, no subscriptions, and no premium tiers. It is a global public service.</p></div>
+      </div>
+      <div class="faq-mini-item">
+        <div class="faq-mini-q">Can Human Mirror help me find a specific resource in my country? <span class="faq-toggle">+</span></div>
+        <div class="faq-mini-a"><p>Yes — use the search on our homepage and describe your situation. The AI will find the best local resources. If we don't have coverage in your area yet, contact us and we'll do our best to help directly.</p></div>
+      </div>
+      <div class="faq-mini-item">
+        <div class="faq-mini-q">How can I report an incorrect or outdated resource? <span class="faq-toggle">+</span></div>
+        <div class="faq-mini-a"><p>Please use the contact form above and select "Report an Incorrect Resource." Include the resource name, what's wrong, and (if possible) the correct information. We'll review and update it within 48 hours.</p></div>
+      </div>
+      <div class="faq-mini-item">
+        <div class="faq-mini-q">I want to add a resource for my country. How? <span class="faq-toggle">+</span></div>
+        <div class="faq-mini-a"><p>Wonderful! Select "Suggest a New Resource" in the contact form, or apply to become a Resource Curator on our <a href="volunteer.html" style="color:var(--green-mid);font-weight:500;">Volunteer page</a>. Curators can add and verify resources directly.</p></div>
+      </div>
+      <div class="faq-mini-item">
+        <div class="faq-mini-q">Is my message to Human Mirror confidential? <span class="faq-toggle">+</span></div>
+        <div class="faq-mini-a"><p>Yes. Your message is only seen by Human Mirror team members working to respond to your enquiry. We never share, sell, or publish contact messages. Your email address is only used to reply to you.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section" style="background:var(--navy);text-align:center;">
+  <div class="section-inner-narrow reveal">
+    <img src="assets/images/logo.jpeg" alt="Human Mirror" style="width:72px;height:72px;object-fit:contain;border-radius:50%;margin:0 auto 20px;opacity:.9;">
+    <h2 class="section-title" style="color:var(--white);">Thank you for<br><em>believing in this mission.</em></h2>
+    <p class="section-desc" style="color:rgba(255,255,255,0.5);margin-bottom:36px;">Every person who reaches out — whether for help, to volunteer, or to partner — makes Human Mirror stronger. Together we are building the world's most trusted human assistance platform.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="index.html" class="btn btn-green btn-lg">Find Help Now</a>
+      <a href="volunteer.html" class="btn btn-outline-white btn-lg">Volunteer</a>
+    </div>
+  </div>
+</section>
+
+<div id="hm-footer"></div>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  this.style.display='none';
+  document.getElementById('contactSuccess').style.display='flex';
+});
+document.querySelectorAll('.faq-mini-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-mini-item').forEach(i=>i.classList.remove('open'));
+    if(!open)item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>

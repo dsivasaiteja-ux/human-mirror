@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works — Human Mirror</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+/* step flow */
+.steps-flow { max-width:900px; margin:0 auto; position:relative; }
+.steps-flow::before { content:''; position:absolute; left:47px; top:60px; bottom:60px; width:2px; background:linear-gradient(180deg,var(--green-pale) 0%,var(--green-mid) 40%,var(--green-pale) 100%); }
+.flow-step { display:grid; grid-template-columns:96px 1fr; gap:32px; align-items:flex-start; margin-bottom:48px; position:relative; }
+.flow-step:last-child { margin-bottom:0; }
+.step-circle { width:96px; height:96px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-direction:column; flex-shrink:0; border:2px solid var(--border); background:var(--white); position:relative; z-index:1; transition:all var(--transition); }
+.flow-step:hover .step-circle { border-color:var(--green-mid); box-shadow:0 0 0 6px var(--green-pale); }
+.step-emoji { font-size:32px; line-height:1; }
+.step-circle-num { font-size:11px; font-weight:600; color:var(--green-mid); margin-top:2px; letter-spacing:1px; }
+.step-body { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:28px 32px; transition:all var(--transition); }
+.flow-step:hover .step-body { border-color:var(--green-mid); box-shadow:var(--shadow-md); }
+.step-tag { font-size:10px; font-weight:500; letter-spacing:2px; text-transform:uppercase; color:var(--green-mid); margin-bottom:8px; }
+.step-h { font-family:'Fraunces',serif; font-size:22px; font-weight:600; color:var(--navy); letter-spacing:-0.5px; margin-bottom:10px; }
+.step-p { font-size:14.5px; color:var(--muted); line-height:1.7; font-weight:300; margin-bottom:14px; }
+.step-example { background:var(--cream); border-radius:var(--radius-sm); padding:14px 18px; font-size:13px; color:var(--muted); font-style:italic; border-left:3px solid var(--green-pale); }
+.step-example strong { color:var(--navy); font-style:normal; font-weight:500; }
+/* AI engine */
+.engine-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+.engine-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:28px; }
+.engine-card-icon { font-size:28px; margin-bottom:14px; }
+.engine-card-title { font-size:16px; font-weight:500; color:var(--navy); margin-bottom:8px; }
+.engine-card-desc { font-size:13.5px; color:var(--muted); line-height:1.65; font-weight:300; }
+/* diagram */
+.diagram { background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%); border-radius:var(--radius-lg); padding:48px; position:relative; overflow:hidden; }
+.diagram::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle at 80% 30%,rgba(58,125,35,0.12) 0%,transparent 60%); }
+.diagram-title { font-family:'Fraunces',serif; font-size:24px; font-weight:600; color:var(--white); margin-bottom:32px; letter-spacing:-0.5px; position:relative; z-index:1; }
+.diagram-nodes { display:flex; align-items:center; justify-content:space-between; gap:12px; position:relative; z-index:1; flex-wrap:wrap; }
+.d-node { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:var(--radius); padding:20px 16px; text-align:center; flex:1; min-width:120px; transition:background var(--transition); }
+.d-node:hover { background:rgba(255,255,255,0.13); }
+.d-node-icon { font-size:28px; margin-bottom:10px; }
+.d-node-label { font-size:12px; font-weight:500; color:rgba(255,255,255,0.85); line-height:1.4; }
+.d-arrow { color:rgba(76,175,48,0.7); font-size:20px; flex-shrink:0; }
+/* faq */
+.faq-list { display:flex; flex-direction:column; gap:12px; }
+.faq-item { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.faq-q { padding:20px 24px; font-size:15px; font-weight:500; color:var(--navy); cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.faq-q:hover { background:var(--cream); }
+.faq-toggle { font-size:20px; color:var(--green-mid); flex-shrink:0; transition:transform .3s; }
+.faq-item.open .faq-toggle { transform:rotate(45deg); }
+.faq-a { padding:0 24px; max-height:0; overflow:hidden; transition:max-height .35s ease, padding .35s ease; }
+.faq-item.open .faq-a { max-height:200px; padding:0 24px 20px; }
+.faq-a p { font-size:14px; color:var(--muted); line-height:1.7; font-weight:300; }
+/* privacy */
+.privacy-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.privacy-card { background:var(--green-pale); border:1px solid rgba(58,125,35,0.15); border-radius:var(--radius); padding:24px; text-align:center; }
+.privacy-icon { font-size:28px; margin-bottom:12px; }
+.privacy-title { font-size:14px; font-weight:500; color:var(--navy); margin-bottom:6px; }
+.privacy-desc { font-size:12px; color:var(--muted); line-height:1.5; font-weight:300; }
+@media (max-width:768px) {
+  .steps-flow::before { display:none; }
+  .flow-step { grid-template-columns:1fr; gap:16px; }
+  .engine-grid { grid-template-columns:1fr; }
+  .diagram-nodes { flex-direction:column; }
+  .d-arrow { transform:rotate(90deg); }
+  .privacy-cards { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:480px) { .privacy-cards{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div id="hm-nav"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"><div class="page-hero-dots"></div></div>
+  <div class="page-hero-content">
+    <div class="page-breadcrumb"><a href="index.html">Home</a> › How It Works</div>
+    <div class="page-badge">Step-By-Step Guide</div>
+    <h1 class="page-title">From <em>confusion</em><br>to clarity in minutes.</h1>
+    <p class="page-subtitle">Human Mirror takes you from not knowing where to turn, to being directly connected with the right help — in five simple steps.</p>
+  </div>
+</section>
+
+<!-- FLOW DIAGRAM -->
+<section class="section" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">The Platform Flow</div>
+      <h2 class="section-title">How Human Mirror<br><em>navigates for you.</em></h2>
+    </div>
+    <div class="diagram reveal">
+      <div class="diagram-title">Your Journey From Problem To Help</div>
+      <div class="diagram-nodes">
+        <div class="d-node"><div class="d-node-icon">💬</div><div class="d-node-label">You Describe<br>Your Situation</div></div>
+        <div class="d-arrow">→</div>
+        <div class="d-node"><div class="d-node-icon">🤖</div><div class="d-node-label">AI Understands<br>Your Need</div></div>
+        <div class="d-arrow">→</div>
+        <div class="d-node"><div class="d-node-icon">📍</div><div class="d-node-label">Location<br>Detected</div></div>
+        <div class="d-arrow">→</div>
+        <div class="d-node"><div class="d-node-icon">🔍</div><div class="d-node-label">Resources<br>Matched</div></div>
+        <div class="d-arrow">→</div>
+        <div class="d-node"><div class="d-node-icon">💛</div><div class="d-node-label">You Get<br>Help</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 STEPS -->
+<section class="section" style="background:var(--cream)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Five Steps</div>
+      <h2 class="section-title">Every step is designed<br><em>with you in mind.</em></h2>
+    </div>
+    <div class="steps-flow">
+
+      <div class="flow-step reveal">
+        <div class="step-circle"><div class="step-emoji">💬</div><div class="step-circle-num">STEP 1</div></div>
+        <div class="step-body">
+          <div class="step-tag">Step 1 of 5</div>
+          <div class="step-h">Describe Your Situation</div>
+          <p class="step-p">You don't need to know what kind of help you need. You don't need the right words or the right category. Simply type what is happening to you — in your own language, in your own words, the way you would tell a trusted friend.</p>
+          <p class="step-p">Human Mirror's search is built for human expression, not keywords. Whether you type "my uncle is hurting me" or "I feel hopeless" or "I lost everything" — the platform understands.</p>
+          <div class="step-example"><strong>Example inputs:</strong> "I think I am being abused at home" — "My child won't go to school anymore" — "I can't afford food for my family" — "I am addicted and need help"</div>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="step-circle"><div class="step-emoji">🤖</div><div class="step-circle-num">STEP 2</div></div>
+        <div class="step-body">
+          <div class="step-tag">Step 2 of 5</div>
+          <div class="step-h">Human Mirror Understands Your Need</div>
+          <p class="step-p">The AI Problem Navigation Engine reads your situation with empathy and intelligence. It identifies the category of need, the urgency level, and the type of support most likely to help you — without judgment, without delay.</p>
+          <p class="step-p">If your situation is unclear or could apply to multiple categories, Human Mirror will ask one or two gentle clarifying questions — the same way a compassionate navigator would.</p>
+          <div class="step-example"><strong>Behind the scenes:</strong> The AI categorises your need, detects urgency signals (crisis vs guidance), determines your language, and prepares location-aware resource matching.</div>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="step-circle"><div class="step-emoji">🔍</div><div class="step-circle-num">STEP 3</div></div>
+        <div class="step-body">
+          <div class="step-tag">Step 3 of 5</div>
+          <div class="step-h">Find Trusted, Verified Resources</div>
+          <p class="step-p">Human Mirror searches its database of 50,000+ verified resources — filtered by your location, your need category, your language, and the urgency of your situation. Every resource has been verified by our team for accuracy, legitimacy, and helpfulness.</p>
+          <p class="step-p">You see the most relevant results first: local helplines, nearby support centres, government services, trained counselors, and NGOs that can specifically help with your situation.</p>
+          <div class="step-example"><strong>Resource types:</strong> Emergency helplines — Counselors and therapists — Government agencies — NGOs and shelters — Online communities — Educational resources</div>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="step-circle"><div class="step-emoji">📞</div><div class="step-circle-num">STEP 4</div></div>
+        <div class="step-body">
+          <div class="step-tag">Step 4 of 5</div>
+          <div class="step-h">Take Action</div>
+          <p class="step-p">Every result includes a clear, direct action — a phone number to call, a website to visit, a form to fill, an address to go to, or a chat to start. Human Mirror removes every barrier between you and the help you need.</p>
+          <p class="step-p">For emergency situations, Human Mirror surfaces crisis lines and SOS contacts immediately at the top of every result — before anything else.</p>
+          <div class="step-example"><strong>Actions available:</strong> One-tap calling — Direct website links — Address and directions — WhatsApp helplines — Email referrals — In-platform AI guidance</div>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="step-circle"><div class="step-emoji">🌱</div><div class="step-circle-num">STEP 5</div></div>
+        <div class="step-body">
+          <div class="step-tag">Step 5 of 5</div>
+          <div class="step-h">Improve Your Life</div>
+          <p class="step-p">Help is not a single moment — it is a journey. Human Mirror supports you beyond the first step by offering educational content, follow-up resources, community connections, and career or educational pathways when your immediate crisis has been addressed.</p>
+          <p class="step-p">Our long-term vision is to not just connect you to help — but to help you reflect, learn, and improve — because every human being has the capacity for a better life with the right support.</p>
+          <div class="step-example"><strong>Beyond crisis:</strong> Career guidance — Education resources — Mental health maintenance — Community belonging — Skill development</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AI ENGINE -->
+<section class="section" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">The AI Engine</div>
+      <h2 class="section-title">Powered by empathy<br><em>and intelligence.</em></h2>
+      <p class="section-desc">The Human Mirror AI Navigation Engine is purpose-built for human vulnerability — designed to guide, never to judge.</p>
+    </div>
+    <div class="engine-grid">
+      <div class="engine-card reveal"><div class="engine-card-icon">🧠</div><div class="engine-card-title">Natural Language Understanding</div><div class="engine-card-desc">Understands informal, emotional, fragmented language — the way real people in distress actually express themselves. You never need to use the "right" words.</div></div>
+      <div class="engine-card reveal reveal-delay-1"><div class="engine-card-icon">🌍</div><div class="engine-card-title">Multilingual by Default</div><div class="engine-card-desc">Supports 40+ languages with native understanding — not just translation. Regional dialects, mixed-language inputs, and colloquial expressions are all handled gracefully.</div></div>
+      <div class="engine-card reveal reveal-delay-2"><div class="engine-card-icon">📍</div><div class="engine-card-title">Location-Intelligent Matching</div><div class="engine-card-desc">Detects your country, state, and city automatically and surfaces resources that are geographically relevant. No more finding a helpline in another country that can't help you.</div></div>
+      <div class="engine-card reveal reveal-delay-3"><div class="engine-card-icon">🚨</div><div class="engine-card-title">Crisis Detection</div><div class="engine-card-desc">Identifies urgent, life-threatening situations and immediately prioritises emergency contacts and crisis support — automatically, without requiring you to label your situation as an "emergency".</div></div>
+      <div class="engine-card reveal reveal-delay-4"><div class="engine-card-icon">🔒</div><div class="engine-card-title">Privacy-First Architecture</div><div class="engine-card-desc">No user accounts required. No conversation logs stored. No personal data retained. Every session is completely anonymous. Seeking help should never feel like a risk.</div></div>
+      <div class="engine-card reveal"><div class="engine-card-icon">🔄</div><div class="engine-card-title">Continuously Learning</div><div class="engine-card-desc">The resource database is updated daily by verified curators globally. The AI improves continuously based on anonymised pattern recognition — never individual tracking.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="section" style="background:var(--green-pale)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Your Privacy</div>
+      <h2 class="section-title">What we <em>never</em> do<br>with your information.</h2>
+    </div>
+    <div class="privacy-cards">
+      <div class="privacy-card reveal"><div class="privacy-icon">🚫</div><div class="privacy-title">No Account Required</div><div class="privacy-desc">Use Human Mirror completely anonymously. No sign-up, no email, no identity required.</div></div>
+      <div class="privacy-card reveal reveal-delay-1"><div class="privacy-icon">🚫</div><div class="privacy-title">No Data Stored</div><div class="privacy-desc">Your search queries and session data are never stored on our servers. Every session ends cleanly.</div></div>
+      <div class="privacy-card reveal reveal-delay-2"><div class="privacy-icon">🚫</div><div class="privacy-title">No Tracking</div><div class="privacy-desc">We do not track you across sessions, across websites, or across devices. You are never a data point.</div></div>
+      <div class="privacy-card reveal reveal-delay-3"><div class="privacy-icon">🚫</div><div class="privacy-title">No Data Selling</div><div class="privacy-desc">Your information is never sold, shared, or monetised. Human Mirror is not an advertising platform.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background:var(--white)">
+  <div class="section-inner-narrow">
+    <div class="section-header reveal">
+      <div class="section-tag">Common Questions</div>
+      <h2 class="section-title">Frequently asked<br><em>questions.</em></h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item"><div class="faq-q">Is Human Mirror completely free to use? <span class="faq-toggle">+</span></div><div class="faq-a"><p>Yes. Human Mirror is, and will always be, completely free to use for any person anywhere in the world. There are no subscription fees, no premium tiers, and no hidden costs. Our platform is a public service.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Do I need to create an account? <span class="faq-toggle">+</span></div><div class="faq-a"><p>No account is ever required. You can use Human Mirror completely anonymously. We believe that requiring registration creates a barrier that prevents vulnerable people from seeking help.</p></div></div>
+      <div class="faq-item"><div class="faq-q">How do I know the resources are legitimate? <span class="faq-toggle">+</span></div><div class="faq-a"><p>Every resource in the Human Mirror database is verified by our team of curators before being listed. We verify that organisations exist, are operational, and genuinely provide the services they claim. Resources are reviewed and updated regularly.</p></div></div>
+      <div class="faq-item"><div class="faq-q">What if there are no resources available in my country? <span class="faq-toggle">+</span></div><div class="faq-a"><p>We are actively expanding. If your country has limited coverage, we will show the best available international resources and online support options. You can also help by becoming a Resource Curator for your region.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Can I use Human Mirror in a language other than English? <span class="faq-toggle">+</span></div><div class="faq-a"><p>Yes. Human Mirror supports 40+ languages and we are continuously adding more. You can type in your own language and the platform will respond accordingly. Multilingual support is central to our mission.</p></div></div>
+      <div class="faq-item"><div class="faq-q">What happens if I am in immediate danger? <span class="faq-toggle">+</span></div><div class="faq-a"><p>If our system detects an emergency signal in your query, it will immediately surface local emergency numbers and crisis contacts at the top of your results. You can also go directly to our Emergency page at any time.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:var(--navy);text-align:center;">
+  <div class="section-inner-narrow reveal">
+    <div class="section-tag" style="color:rgba(76,175,48,0.9);">Ready?</div>
+    <h2 class="section-title" style="color:var(--white);">Your help is<br><em>one search away.</em></h2>
+    <p class="section-desc" style="color:rgba(255,255,255,0.5);margin-bottom:36px;">Start now — no account, no registration, no judgment.</p>
+    <a href="index.html#hero" class="btn btn-green btn-lg">Find Help Now →</a>
+  </div>
+</section>
+
+<div id="hm-footer"></div>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>

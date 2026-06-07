@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volunteer — Human Mirror</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.vol-hero-split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.vol-roles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.vol-role-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all .25s;position:relative;overflow:hidden;}
+.vol-role-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--role-color,var(--green-mid));transform:scaleX(0);transition:transform .25s;transform-origin:left;}
+.vol-role-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);}
+.vol-role-card:hover::before{transform:scaleX(1);}
+.role-icon{font-size:36px;margin-bottom:16px;}
+.role-title{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--navy);letter-spacing:-0.5px;margin-bottom:8px;}
+.role-desc{font-size:14px;color:var(--muted);line-height:1.65;font-weight:300;margin-bottom:16px;}
+.role-skills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.role-commitment{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.skill-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;transition:all .2s;}
+.skill-card:hover{border-color:var(--green-mid);box-shadow:var(--shadow-soft);}
+.skill-icon{font-size:28px;margin-bottom:10px;}
+.skill-name{font-size:14px;font-weight:500;color:var(--navy);margin-bottom:4px;}
+.skill-desc{font-size:12px;color:var(--muted);line-height:1.5;font-weight:300;}
+.impact-banner{background:linear-gradient(135deg,var(--green) 0%,var(--green-mid) 100%);border-radius:var(--radius-lg);padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.impact-stat{text-align:center;}
+.impact-num{font-family:'Fraunces',serif;font-size:48px;font-weight:600;color:#fff;letter-spacing:-2px;line-height:1;}
+.impact-num span{color:rgba(255,255,255,0.7);}
+.impact-label{font-size:13px;color:rgba(255,255,255,0.7);margin-top:4px;}
+.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.process-steps{display:flex;flex-direction:column;gap:16px;}
+.process-step{display:flex;align-items:flex-start;gap:20px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all .2s;}
+.process-step:hover{box-shadow:var(--shadow-soft);}
+.process-circle{width:44px;height:44px;border-radius:50%;background:var(--green-pale);border:2px solid var(--green-mid);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--green-mid);flex-shrink:0;}
+.process-title{font-size:16px;font-weight:500;color:var(--navy);margin-bottom:4px;}
+.process-desc{font-size:13.5px;color:var(--muted);line-height:1.6;font-weight:300;}
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-soft);}
+.form-success{display:none;flex-direction:column;align-items:center;text-align:center;padding:40px;gap:12px;}
+.form-success-icon{font-size:48px;}
+.form-success-title{font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:var(--navy);}
+.form-success-desc{font-size:15px;color:var(--muted);font-weight:300;}
+@media(max-width:1024px){.skills-grid{grid-template-columns:repeat(2,1fr);} .vol-roles-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:768px){.vol-hero-split{grid-template-columns:1fr;gap:32px;} .vol-roles-grid{grid-template-columns:1fr;} .impact-banner{grid-template-columns:1fr;gap:28px;padding:36px 24px;} .skills-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+<div id="hm-nav"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"><div class="page-hero-dots"></div></div>
+  <div class="page-hero-content">
+    <div class="page-breadcrumb"><a href="index.html">Home</a> › Volunteer</div>
+    <div class="page-badge">Join The Mission</div>
+    <h1 class="page-title">Be the help<br>someone <em>has been</em><br>waiting for.</h1>
+    <p class="page-subtitle">Human Mirror is powered by a global community of volunteers who believe every person deserves access to the right help. Join us — from anywhere in the world.</p>
+  </div>
+</section>
+
+<!-- WHY VOLUNTEER -->
+<section class="section" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="vol-hero-split">
+      <div class="reveal">
+        <div class="section-tag">Why Volunteer With Us</div>
+        <h2 class="section-title" style="text-align:left;font-size:38px;">Your skills can<br><em>change a life.</em></h2>
+        <div class="gold-line gold-line-left"></div>
+        <p style="font-size:16px;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:20px;">Millions of people around the world are suffering in silence — not because help doesn't exist, but because they can't find it. As a Human Mirror volunteer, you become the bridge between them and the help they need.</p>
+        <p style="font-size:16px;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:28px;">Whether you have 2 hours or 20 hours a week, whether you're a student, a professional, or a retiree — there is a meaningful role for you in this mission.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px;">
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--navy);"><span style="color:var(--green-mid);font-weight:600;">✓</span>Flexible — volunteer from anywhere, on your schedule</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--navy);"><span style="color:var(--green-mid);font-weight:600;">✓</span>No experience required — we train you</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--navy);"><span style="color:var(--green-mid);font-weight:600;">✓</span>Certificate of recognition for all volunteers</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--navy);"><span style="color:var(--green-mid);font-weight:600;">✓</span>Real, measurable impact in your community</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--navy);"><span style="color:var(--green-mid);font-weight:600;">✓</span>Join a global network of passionate changemakers</div>
+        </div>
+        <a href="#apply" class="btn btn-green">Apply to Volunteer →</a>
+      </div>
+      <div class="impact-banner reveal">
+        <div>
+          <div style="font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:#fff;margin-bottom:24px;letter-spacing:-0.5px;">Our Volunteer Community</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="impact-stat"><div class="impact-num"><span class="count-up" data-target="2400">0</span><span>+</span></div><div class="impact-label">Active Volunteers</div></div>
+            <div class="impact-stat"><div class="impact-num"><span class="count-up" data-target="68">0</span><span>+</span></div><div class="impact-label">Countries Represented</div></div>
+            <div class="impact-stat"><div class="impact-num"><span class="count-up" data-target="120000">0</span><span>+</span></div><div class="impact-label">Hours Contributed</div></div>
+            <div class="impact-stat"><div class="impact-num"><span class="count-up" data-target="50000">0</span><span>+</span></div><div class="impact-label">Resources Added</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEER ROLES -->
+<section class="section" style="background:var(--cream)">
+  <div class="section-inner-wide">
+    <div class="section-header reveal">
+      <div class="section-tag">Volunteer Roles</div>
+      <h2 class="section-title">Find your role<br><em>in the mission.</em></h2>
+      <p class="section-desc">Six ways to contribute — choose what fits your skills, time, and passion.</p>
+    </div>
+    <div class="vol-roles-grid">
+      <div class="vol-role-card reveal" style="--role-color:#3A7D23;">
+        <div class="role-icon">🧭</div>
+        <div class="role-title">Platform Guide</div>
+        <p class="role-desc">Help users in your language navigate Human Mirror — answering questions, explaining resources, and guiding people to the right help through our support channels.</p>
+        <div class="role-skills"><span class="chip chip-green">Communication</span><span class="chip chip-green">Empathy</span><span class="chip chip-green">Local Knowledge</span></div>
+        <div class="role-commitment">⏱️ 3–5 hrs/week • Remote • Any language</div>
+      </div>
+      <div class="vol-role-card reveal reveal-delay-1" style="--role-color:#2563EB;">
+        <div class="role-icon">📋</div>
+        <div class="role-title">Resource Curator</div>
+        <p class="role-desc">Research, verify, and add local resources for your country, state, and city. Ensure that the Human Mirror database reflects the real landscape of available help in your region.</p>
+        <div class="role-skills"><span class="chip">Research</span><span class="chip">Attention to Detail</span><span class="chip">Local Knowledge</span></div>
+        <div class="role-commitment">⏱️ 2–4 hrs/week • Remote • All regions needed</div>
+      </div>
+      <div class="vol-role-card reveal reveal-delay-2" style="--role-color:#7C3AED;">
+        <div class="role-icon">🌍</div>
+        <div class="role-title">Translator</div>
+        <p class="role-desc">Translate platform content, resource descriptions, and guidance articles into your native language — helping millions of people access help in the language they understand best.</p>
+        <div class="role-skills"><span class="chip">Bilingual</span><span class="chip">Writing</span><span class="chip">Cultural Nuance</span></div>
+        <div class="role-commitment">⏱️ 2–6 hrs/week • Remote • All languages needed</div>
+      </div>
+      <div class="vol-role-card reveal" style="--role-color:#D97706;">
+        <div class="role-icon">📣</div>
+        <div class="role-title">Community Ambassador</div>
+        <p class="role-desc">Spread awareness of Human Mirror in your community, school, workplace, or social network. Help people know that this platform exists and that help is available.</p>
+        <div class="role-skills"><span class="chip">Networking</span><span class="chip">Social Media</span><span class="chip">Storytelling</span></div>
+        <div class="role-commitment">⏱️ Flexible • Field + Remote • Global</div>
+      </div>
+      <div class="vol-role-card reveal reveal-delay-1" style="--role-color:#0D9488;">
+        <div class="role-icon">💻</div>
+        <div class="role-title">Tech Volunteer</div>
+        <p class="role-desc">Contribute your technical skills to improve the Human Mirror platform — whether in frontend development, data engineering, AI/ML, accessibility, or UX design.</p>
+        <div class="role-skills"><span class="chip">Development</span><span class="chip">Data</span><span class="chip">Design</span><span class="chip">AI/ML</span></div>
+        <div class="role-commitment">⏱️ Project-based • Remote • Open source</div>
+      </div>
+      <div class="vol-role-card reveal reveal-delay-2" style="--role-color:#DB2777;">
+        <div class="role-icon">✍️</div>
+        <div class="role-title">Content Creator</div>
+        <p class="role-desc">Write educational articles, resource guides, and awareness content that helps people understand their options — across mental health, legal rights, child safety, and more.</p>
+        <div class="role-skills"><span class="chip">Writing</span><span class="chip">Research</span><span class="chip">Empathy</span></div>
+        <div class="role-commitment">⏱️ 3–6 hrs/week • Remote • English + regional</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS NEEDED -->
+<section class="section" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Skills We Need</div>
+      <h2 class="section-title">No matter what you do,<br><em>there's a place for you.</em></h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal"><div class="skill-icon">🗣️</div><div class="skill-name">Languages</div><div class="skill-desc">Any language beyond English — regional, minority, or sign languages</div></div>
+      <div class="skill-card reveal reveal-delay-1"><div class="skill-icon">💻</div><div class="skill-name">Technology</div><div class="skill-desc">Development, data science, AI, accessibility, UX/UI design</div></div>
+      <div class="skill-card reveal reveal-delay-2"><div class="skill-icon">📝</div><div class="skill-name">Writing</div><div class="skill-desc">Content writing, journalism, storytelling, editing, copywriting</div></div>
+      <div class="skill-card reveal reveal-delay-3"><div class="skill-icon">🔍</div><div class="skill-name">Research</div><div class="skill-desc">Resource verification, data gathering, organisational research</div></div>
+      <div class="skill-card reveal"><div class="skill-icon">🧠</div><div class="skill-name">Counselling</div><div class="skill-desc">Mental health background, social work, community development</div></div>
+      <div class="skill-card reveal reveal-delay-1"><div class="skill-icon">⚖️</div><div class="skill-name">Legal Knowledge</div><div class="skill-desc">Law, rights, advocacy, pro bono guidance development</div></div>
+      <div class="skill-card reveal reveal-delay-2"><div class="skill-icon">📊</div><div class="skill-name">Data &amp; Analysis</div><div class="skill-desc">Database management, quality assurance, impact measurement</div></div>
+      <div class="skill-card reveal reveal-delay-3"><div class="skill-icon">🤝</div><div class="skill-name">Community Building</div><div class="skill-desc">Outreach, partnerships, social media, awareness campaigns</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO JOIN -->
+<section class="section" style="background:var(--cream)">
+  <div class="section-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
+    <div class="reveal">
+      <div class="section-tag">How To Join</div>
+      <h2 class="section-title" style="text-align:left;font-size:34px;">Four simple steps<br><em>to get started.</em></h2>
+      <div style="margin-top:32px;" class="process-steps">
+        <div class="process-step"><div class="process-circle">1</div><div><div class="process-title">Submit Your Application</div><div class="process-desc">Fill in the registration form on this page with your name, location, skills, and the role you're interested in.</div></div></div>
+        <div class="process-step"><div class="process-circle">2</div><div><div class="process-title">Short Introductory Call</div><div class="process-desc">A member of our volunteer team will reach out to schedule a 20-minute call to learn more about you and your goals.</div></div></div>
+        <div class="process-step"><div class="process-circle">3</div><div><div class="process-title">Onboarding &amp; Training</div><div class="process-desc">You'll receive a welcome package, access to our volunteer portal, and role-specific training materials.</div></div></div>
+        <div class="process-step"><div class="process-circle">4</div><div><div class="process-title">Start Making an Impact</div><div class="process-desc">Begin contributing immediately — with support from your regional volunteer coordinator and the global Human Mirror community.</div></div></div>
+      </div>
+    </div>
+
+    <!-- REGISTRATION FORM -->
+    <div class="reveal" id="apply">
+      <div class="form-card">
+        <div class="form-success" id="volFormSuccess">
+          <div class="form-success-icon">🎉</div>
+          <div class="form-success-title">Application Received!</div>
+          <div class="form-success-desc">Thank you for joining the Human Mirror mission. We'll be in touch within 3 business days.</div>
+        </div>
+        <form class="hm-form" id="volForm">
+          <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--navy);margin-bottom:4px;letter-spacing:-0.5px;">Volunteer Registration</h3>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:24px;font-weight:300;">Join thousands of volunteers making a global impact.</p>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">First Name *</label><input class="form-input" type="text" placeholder="Your first name" required></div>
+            <div class="form-group"><label class="form-label">Last Name *</label><input class="form-input" type="text" placeholder="Your last name" required></div>
+          </div>
+          <div class="form-group"><label class="form-label">Email Address *</label><input class="form-input" type="email" placeholder="your@email.com" required></div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Country *</label><select class="form-select" required><option value="">Select country</option><option>India</option><option>United Arab Emirates</option><option>United States</option><option>United Kingdom</option><option>Other</option></select></div>
+            <div class="form-group"><label class="form-label">Languages Spoken *</label><input class="form-input" type="text" placeholder="e.g. English, Hindi, Tamil" required></div>
+          </div>
+          <div class="form-group"><label class="form-label">Volunteer Role *</label><select class="form-select" required><option value="">Select a role</option><option>Platform Guide</option><option>Resource Curator</option><option>Translator</option><option>Community Ambassador</option><option>Tech Volunteer</option><option>Content Creator</option><option>Other / Multiple</option></select></div>
+          <div class="form-group"><label class="form-label">Hours Available Per Week</label><select class="form-select"><option>1–2 hours</option><option>3–5 hours</option><option>5–10 hours</option><option>10+ hours</option></select></div>
+          <div class="form-group"><label class="form-label">Tell Us About Yourself</label><textarea class="form-textarea" placeholder="Why do you want to volunteer with Human Mirror? What skills or experiences do you bring?" style="min-height:100px;"></textarea></div>
+          <div class="form-group" style="display:flex;align-items:flex-start;gap:10px;"><input type="checkbox" id="vol-consent" style="margin-top:3px;flex-shrink:0;" required><label for="vol-consent" style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.5;">I understand that volunteering is unpaid and I am committed to the Human Mirror mission of connecting every human to the help they need.</label></div>
+          <button type="submit" class="btn btn-green" style="width:100%;justify-content:center;">Submit Application →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="hm-footer"></div>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+document.getElementById('volForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  this.style.display='none';
+  document.getElementById('volFormSuccess').style.display='flex';
+});
+</script>
+</body>
+</html>

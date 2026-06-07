@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Resources — Human Mirror</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.region-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px;}
+.region-tab{padding:9px 20px;border-radius:50px;border:1.5px solid var(--border);background:var(--white);font-size:13px;color:var(--muted);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;}
+.region-tab:hover,.region-tab.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+.country-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.country-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all .2s;cursor:pointer;}
+.country-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.country-card-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.country-flag{font-size:28px;}
+.country-name{font-size:16px;font-weight:600;color:var(--navy);}
+.country-region{font-size:12px;color:var(--muted);}
+.country-cats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.country-resources{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;}
+.country-footer{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.country-res-count{font-size:12px;color:var(--muted);}
+.country-link{font-size:13px;color:var(--green-mid);font-weight:500;}
+.org-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;display:flex;gap:18px;align-items:flex-start;transition:all .2s;}
+.org-card:hover{box-shadow:var(--shadow-md);border-color:var(--border-strong);}
+.org-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;background:var(--surface);}
+.org-name{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.org-scope{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.org-desc{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;}
+.org-link{display:inline-block;margin-top:10px;font-size:13px;color:var(--green-mid);font-weight:500;}
+.map-visual{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);border-radius:var(--radius-lg);padding:48px;text-align:center;position:relative;overflow:hidden;}
+.map-visual::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 50% 50%,rgba(58,125,35,0.1) 0%,transparent 60%);}
+.map-grid-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.08) 1px,transparent 1px);background-size:32px 32px;}
+.map-content{position:relative;z-index:1;}
+.coverage-bar{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;}
+.coverage-region{font-size:14px;color:rgba(255,255,255,0.85);font-weight:500;width:180px;flex-shrink:0;}
+.coverage-track{flex:1;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;}
+.coverage-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--green-light),var(--green-mid));}
+.coverage-pct{font-size:13px;color:rgba(76,175,48,0.9);font-weight:500;width:50px;text-align:right;}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+@media(max-width:1024px){.country-grid{grid-template-columns:repeat(2,1fr);} .stat-row{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.country-grid{grid-template-columns:1fr;} .stat-row{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+<div id="hm-nav"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"><div class="page-hero-dots"></div></div>
+  <div class="page-hero-content">
+    <div class="page-breadcrumb"><a href="index.html">Home</a> › Global Resources</div>
+    <div class="page-badge">Worldwide Directory</div>
+    <h1 class="page-title">Help resources<br><em>from every corner</em><br>of the world.</h1>
+    <p class="page-subtitle">A growing directory of verified organisations, helplines, government services, and NGOs — organised by country, region, and category.</p>
+  </div>
+</section>
+
+<!-- COVERAGE MAP -->
+<section class="section" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="map-visual reveal">
+      <div class="map-grid-dots"></div>
+      <div class="map-content">
+        <div style="font-size:48px;margin-bottom:16px;">🌍</div>
+        <div style="font-family:'Fraunces',serif;font-size:28px;font-weight:600;color:#fff;letter-spacing:-1px;margin-bottom:8px;">Global Coverage Progress</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:36px;font-weight:300;">Human Mirror resource database — growing every day</div>
+        <div style="max-width:700px;margin:0 auto;">
+          <div class="coverage-bar"><div class="coverage-region">🇮🇳 South Asia</div><div class="coverage-track"><div class="coverage-fill" style="width:78%"></div></div><div class="coverage-pct">78%</div></div>
+          <div class="coverage-bar"><div class="coverage-region">🇦🇪 Middle East</div><div class="coverage-track"><div class="coverage-fill" style="width:62%"></div></div><div class="coverage-pct">62%</div></div>
+          <div class="coverage-bar"><div class="coverage-region">🇺🇸 North America</div><div class="coverage-track"><div class="coverage-fill" style="width:85%"></div></div><div class="coverage-pct">85%</div></div>
+          <div class="coverage-bar"><div class="coverage-region">🇬🇧 Europe</div><div class="coverage-track"><div class="coverage-fill" style="width:71%"></div></div><div class="coverage-pct">71%</div></div>
+          <div class="coverage-bar"><div class="coverage-region">🌍 Sub-Saharan Africa</div><div class="coverage-track"><div class="coverage-fill" style="width:34%"></div></div><div class="coverage-pct">34%</div></div>
+          <div class="coverage-bar"><div class="coverage-region">🌏 Southeast Asia</div><div class="coverage-track"><div class="coverage-fill" style="width:45%"></div></div><div class="coverage-pct">45%</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="stat-row" style="margin-top:24px;">
+      <div class="stat-card reveal"><div class="stat-num"><span class="count-up" data-target="195">0</span><span>+</span></div><div class="stat-label">Countries in Database</div></div>
+      <div class="stat-card reveal reveal-delay-1"><div class="stat-num"><span class="count-up" data-target="50000">0</span><span>+</span></div><div class="stat-label">Verified Resources</div></div>
+      <div class="stat-card reveal reveal-delay-2"><div class="stat-num"><span class="count-up" data-target="1200">0</span><span>+</span></div><div class="stat-label">Partner Organisations</div></div>
+      <div class="stat-card reveal reveal-delay-3"><div class="stat-num"><span class="count-up" data-target="40">0</span><span>+</span></div><div class="stat-label">Languages Supported</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BY COUNTRY -->
+<section class="section" style="background:var(--cream)">
+  <div class="section-inner-wide">
+    <div class="section-header reveal">
+      <div class="section-tag">By Country</div>
+      <h2 class="section-title">Browse resources<br><em>by country.</em></h2>
+    </div>
+    <div class="region-tabs reveal">
+      <button class="region-tab active" data-region="all">🌐 All Regions</button>
+      <button class="region-tab" data-region="asia">🌏 Asia</button>
+      <button class="region-tab" data-region="middleeast">🌙 Middle East</button>
+      <button class="region-tab" data-region="americas">🌎 Americas</button>
+      <button class="region-tab" data-region="europe">🇪🇺 Europe</button>
+      <button class="region-tab" data-region="africa">🌍 Africa</button>
+    </div>
+    <div class="country-grid">
+      <div class="country-card reveal" data-region="asia"><div class="country-card-top"><div class="country-flag">🇮🇳</div><div><div class="country-name">India</div><div class="country-region">South Asia</div></div></div><div class="country-cats"><span class="chip chip-green">Child Safety</span><span class="chip">Mental Health</span><span class="chip">Women Safety</span><span class="chip">Legal Aid</span><span class="chip">Cyber Safety</span></div><div class="country-resources">Childline (1098), iCall, NIMHANS, NCPCR, Women Helpline (181), Vandrevala Foundation, Cybercrime Portal (1930), District Legal Services</div><div class="country-footer"><span class="country-res-count">8,400+ resources</span><a href="emergency.html" class="country-link">View →</a></div></div>
+
+      <div class="country-card reveal reveal-delay-1" data-region="middleeast"><div class="country-card-top"><div class="country-flag">🇦🇪</div><div><div class="country-name">United Arab Emirates</div><div class="country-region">Middle East</div></div></div><div class="country-cats"><span class="chip chip-green">Family Services</span><span class="chip">Legal Rights</span><span class="chip">Social Support</span></div><div class="country-resources">Ministry of Community Development, EWAA Shelters, Aman (800-AMAN), Dubai Police Social Services, Knowledge & Human Development Authority</div><div class="country-footer"><span class="country-res-count">1,200+ resources</span><a href="#" class="country-link">View →</a></div></div>
+
+      <div class="country-card reveal reveal-delay-2" data-region="americas"><div class="country-card-top"><div class="country-flag">🇺🇸</div><div><div class="country-name">United States</div><div class="country-region">North America</div></div></div><div class="country-cats"><span class="chip chip-green">211 Network</span><span class="chip">Mental Health</span><span class="chip">Benefits</span><span class="chip">Housing</span></div><div class="country-resources">211 (nationwide), SAMHSA, NAMI, National DV Hotline, Childhelp, 988 Suicide Lifeline, Crisis Text Line (741741), FEMA</div><div class="country-footer"><span class="country-res-count">14,000+ resources</span><a href="#" class="country-link">View →</a></div></div>
+
+      <div class="country-card reveal" data-region="europe"><div class="country-card-top"><div class="country-flag">🇬🇧</div><div><div class="country-name">United Kingdom</div><div class="country-region">Europe</div></div></div><div class="country-cats"><span class="chip chip-green">NHS Linked</span><span class="chip">Citizens Advice</span><span class="chip">Crisis Lines</span></div><div class="country-resources">Samaritans (116 123), Childline (0800 1111), Refuge, Citizens Advice, NHS 111, Mind, Age UK, StepChange, Turn2us</div><div class="country-footer"><span class="country-res-count">5,600+ resources</span><a href="#" class="country-link">View →</a></div></div>
+
+      <div class="country-card reveal reveal-delay-1" data-region="asia"><div class="country-card-top"><div class="country-flag">🇧🇩</div><div><div class="country-name">Bangladesh</div><div class="country-region">South Asia</div></div></div><div class="country-cats"><span class="chip">Child Safety</span><span class="chip">Women Safety</span><span class="chip">Disaster Relief</span></div><div class="country-resources">Bangladesh National Helpline (999), Manusher Jonno Foundation, BRAC, Acid Survivors Foundation, Child Helpline (1098)</div><div class="country-footer"><span class="country-res-count">1,100+ resources</span><a href="#" class="country-link">View →</a></div></div>
+
+      <div class="country-card reveal reveal-delay-2" data-region="africa"><div class="country-card-top"><div class="country-flag">🇳🇬</div><div><div class="country-name">Nigeria</div><div class="country-region">West Africa</div></div></div><div class="country-cats"><span class="chip">Mental Health</span><span class="chip">Women Safety</span><span class="chip">Child Safety</span></div><div class="country-resources">SERVICOM, NAPTIP (trafficking), Lagos State Domestic Violence Agency, NIMR Mental Health, Emergency (112)</div><div class="country-footer"><span class="country-res-count">890+ resources</span><a href="#" class="country-link">View →</a></div></div>
+
+      <div class="country-card reveal" data-region="americas"><div class="country-card-top"><div class="country-flag">🇧🇷</div><div><div class="country-name">Brazil</div><div class="country-region">South America</div></div></div><div class="country-cats"><span class="chip">Mental Health</span><span class="chip">Women Safety</span><span class="chip">Child Safety</span></div><div class="country-resources">CVV Suicide Prevention (188), Ligue Saúde (136), Disque 100 (child rights), Central de Atendimento à Mulher (180)</div><div class="country-footer"><span class="country-res-count">2,100+ resources</span><a href="#" class="country-link">View →</a></div></div>
+
+      <div class="country-card reveal reveal-delay-1" data-region="asia"><div class="country-card-top"><div class="country-flag">🇵🇰</div><div><div class="country-name">Pakistan</div><div class="country-region">South Asia</div></div></div><div class="country-cats"><span class="chip">Child Safety</span><span class="chip">Women Safety</span><span class="chip">Mental Health</span></div><div class="country-resources">Umang (0317-4288665), Child Protection Bureau, Rozan Counselling Centre, Edhi Foundation, Emergency (1122)</div><div class="country-footer"><span class="country-res-count">780+ resources</span><a href="#" class="country-link">View →</a></div></div>
+
+      <div class="country-card reveal reveal-delay-2" data-region="europe"><div class="country-card-top"><div class="country-flag">🇩🇪</div><div><div class="country-name">Germany</div><div class="country-region">Europe</div></div></div><div class="country-cats"><span class="chip">Mental Health</span><span class="chip">Women Safety</span><span class="chip">Legal Aid</span></div><div class="country-resources">Telefonseelsorge (0800-111 0 111), Hilfetelefon Gewalt (08000 116 016), Caritas, Diakonie, Emergency (112)</div><div class="country-footer"><span class="country-res-count">3,200+ resources</span><a href="#" class="country-link">View →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED ORGS -->
+<section class="section" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Featured Organisations</div>
+      <h2 class="section-title">Trusted global partners<br><em>making a real difference.</em></h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="org-card reveal"><div class="org-icon">🌍</div><div><div class="org-name">UNICEF — United Nations Children's Fund</div><div class="org-scope">Global • Child Protection, Education, Health</div><div class="org-desc">UNICEF works in over 190 countries to protect the rights of every child — from emergency relief to long-term development programmes. The world's leading organisation for child welfare.</div><a href="https://www.unicef.org" target="_blank" class="org-link">Visit unicef.org →</a></div></div>
+      <div class="org-card reveal"><div class="org-icon">🏛️</div><div><div class="org-name">UNHCR — UN Refugee Agency</div><div class="org-scope">Global • Refugees, Displacement, Legal Protection</div><div class="org-desc">UNHCR protects and supports refugees, asylum seekers, and stateless people worldwide — providing emergency shelter, legal aid, healthcare, and pathways to safety and dignity.</div><a href="https://www.unhcr.org" target="_blank" class="org-link">Visit unhcr.org →</a></div></div>
+      <div class="org-card reveal"><div class="org-icon">❤️</div><div><div class="org-name">International Red Cross &amp; Red Crescent</div><div class="org-scope">Global • Disaster, Medical, Humanitarian</div><div class="org-desc">The world's most trusted emergency response network — present in virtually every country, providing life-saving aid in conflicts, disasters, and health crises.</div><a href="https://www.icrc.org" target="_blank" class="org-link">Visit icrc.org →</a></div></div>
+      <div class="org-card reveal"><div class="org-icon">👩</div><div><div class="org-name">UN Women</div><div class="org-scope">Global • Gender Equality, Women's Rights, Safety</div><div class="org-desc">UN Women champions gender equality and the empowerment of women worldwide — supporting survivors of violence, advancing women's economic rights, and holding governments accountable.</div><a href="https://www.unwomen.org" target="_blank" class="org-link">Visit unwomen.org →</a></div></div>
+      <div class="org-card reveal"><div class="org-icon">🧠</div><div><div class="org-name">WHO Mental Health Action Plan</div><div class="org-scope">Global • Mental Health, Policy, Resources</div><div class="org-desc">The World Health Organization's comprehensive global framework for mental health — covering prevention, treatment, and recovery across all countries and all income levels.</div><a href="https://www.who.int/mental_health" target="_blank" class="org-link">Visit who.int →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GOVERNMENT RESOURCES -->
+<section class="section" style="background:var(--cream)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Government Resources</div>
+      <h2 class="section-title">Official government<br><em>support services.</em></h2>
+      <p class="section-desc">Verified government helplines, portals, and support schemes — organised by country.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal" style="background:var(--white);">
+        <div style="font-size:28px;margin-bottom:12px;">🇮🇳</div>
+        <div style="font-size:16px;font-weight:600;color:var(--navy);margin-bottom:14px;">India — Government Services</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>PM Jan Arogya Yojana (Health)</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>National Portal for Women</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>NCPCR Child Rights</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>eSampark Legal Aid</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>Cybercrime Reporting Portal</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-1" style="background:var(--white);">
+        <div style="font-size:28px;margin-bottom:12px;">🇦🇪</div>
+        <div style="font-size:16px;font-weight:600;color:var(--navy);margin-bottom:14px;">UAE — Government Services</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>Ministry of Community Dev.</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>UAE Family Development Found.</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>Dubai Health Authority</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>Watani Social Support</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>KHDA Education Support</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+        </div>
+      </div>
+      <div class="card reveal reveal-delay-2" style="background:var(--white);">
+        <div style="font-size:28px;margin-bottom:12px;">🇺🇸</div>
+        <div style="font-size:16px;font-weight:600;color:var(--navy);margin-bottom:14px;">USA — Government Services</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>Benefits.gov</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>SAMHSA Mental Health</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>HHS Child Welfare</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>DOJ Legal Resources</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+          <div style="font-size:13px;color:var(--muted);display:flex;justify-content:space-between;"><span>211 — Social Services</span><a href="#" style="color:var(--green-mid);font-weight:500;">Visit</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:var(--navy);text-align:center;">
+  <div class="section-inner-narrow reveal">
+    <div class="section-tag" style="color:rgba(76,175,48,0.9);">Can't Find Your Country?</div>
+    <h2 class="section-title" style="color:var(--white);">Help us expand<br><em>to your region.</em></h2>
+    <p class="section-desc" style="color:rgba(255,255,255,0.5);margin-bottom:36px;">Become a Resource Curator and help us add verified resources for your country, language, and community.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="volunteer.html" class="btn btn-green btn-lg">Become a Curator</a>
+      <a href="contact.html" class="btn btn-outline-white btn-lg">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<div id="hm-footer"></div>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+document.querySelectorAll('.region-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.region-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const r=tab.getAttribute('data-region');
+    document.querySelectorAll('.country-card').forEach(c=>{
+      c.style.display=(r==='all'||c.getAttribute('data-region')===r)?'':'none';
+    });
+  });
+});
+</script>
+</body>
+</html>

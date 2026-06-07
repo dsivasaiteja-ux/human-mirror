@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Categories — Human Mirror</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:48px;}
+.filter-btn{padding:9px 20px;border-radius:50px;border:1.5px solid var(--border);background:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;color:var(--muted);cursor:pointer;transition:all .2s;}
+.filter-btn:hover,.filter-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy);}
+.cats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.cat-full{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);background:var(--white);transition:all .25s;cursor:pointer;}
+.cat-full:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:transparent;}
+.cat-full-header{padding:28px 28px 20px;display:flex;align-items:flex-start;gap:16px;}
+.cat-full-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.cat-full-meta{}
+.cat-full-name{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--navy);letter-spacing:-0.5px;margin-bottom:4px;}
+.cat-full-tagline{font-size:13px;color:var(--muted);font-weight:300;}
+.cat-full-body{padding:0 28px 28px;}
+.cat-full-desc{font-size:14px;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:16px;}
+.cat-who{background:var(--cream);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:16px;}
+.cat-who-label{font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.cat-who-list{font-size:13px;color:var(--navy);font-weight:300;line-height:1.6;}
+.cat-resources{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.cat-resource-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);font-weight:300;}
+.cat-resource-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.cat-full-footer{padding:16px 28px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.cat-count-badge{font-size:12px;color:var(--muted);}
+.cat-explore-link{font-size:13px;font-weight:500;color:var(--green-mid);display:flex;align-items:center;gap:6px;}
+.cat-explore-link:hover{text-decoration:underline;}
+.accent-bar{height:4px;width:100%;}
+@media(max-width:1024px){.cats-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.cats-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div id="hm-nav"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"><div class="page-hero-dots"></div></div>
+  <div class="page-hero-content">
+    <div class="page-breadcrumb"><a href="index.html">Home</a> › Categories</div>
+    <div class="page-badge">Help Categories</div>
+    <h1 class="page-title">Every kind of help.<br><em>All in one place.</em></h1>
+    <p class="page-subtitle">Human Mirror covers twelve essential areas of human need — each with verified resources, expert guidance, and compassionate support.</p>
+  </div>
+</section>
+
+<section class="section" style="background:var(--white)">
+  <div class="section-inner-wide">
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">All Categories</button>
+      <button class="filter-btn" data-filter="crisis">Crisis &amp; Safety</button>
+      <button class="filter-btn" data-filter="health">Health &amp; Wellbeing</button>
+      <button class="filter-btn" data-filter="growth">Education &amp; Growth</button>
+      <button class="filter-btn" data-filter="community">Community &amp; Support</button>
+    </div>
+    <div class="cats-grid">
+
+      <!-- MENTAL HEALTH -->
+      <div class="cat-full reveal" data-category="health">
+        <div class="accent-bar" style="background:#7C3AED;"></div>
+        <div class="cat-full-header">
+          <div class="cat-full-icon" style="background:#F5F3FF;">🧠</div>
+          <div class="cat-full-meta">
+            <div class="cat-full-name">Mental Health</div>
+            <div class="cat-full-tagline">Support for emotional &amp; psychological wellbeing</div>
+          </div>
+        </div>
+        <div class="cat-full-body">
+          <p class="cat-full-desc">Mental health affects every aspect of life. Human Mirror connects you to counselors, therapists, crisis helplines, peer support groups, and evidence-based self-help resources — whatever stage of your journey you are on.</p>
+          <div class="cat-who">
+            <div class="cat-who-label">Who It Helps</div>
+            <div class="cat-who-list">Individuals experiencing anxiety, depression, trauma, grief, loneliness, burnout, PTSD, or any emotional difficulty. Families supporting loved ones.</div>
+          </div>
+          <div class="cat-resources">
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#7C3AED;"></div>iCall — Free counselling helpline (India)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#7C3AED;"></div>NIMHANS — National Mental Health Institute</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#7C3AED;"></div>Samaritans — 24/7 crisis support (UK)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#7C3AED;"></div>NAMI — National Alliance on Mental Illness (US)</div>
+          </div>
+        </div>
+        <div class="cat-full-footer">
+          <span class="cat-count-badge">3,200+ resources worldwide</span>
+          <a href="emergency.html" class="cat-explore-link">Explore Resources →</a>
+        </div>
+      </div>
+
+      <!-- CHILD PROTECTION -->
+      <div class="cat-full reveal reveal-delay-1" data-category="crisis">
+        <div class="accent-bar" style="background:#DC2626;"></div>
+        <div class="cat-full-header">
+          <div class="cat-full-icon" style="background:#FFF5F5;">🛡️</div>
+          <div class="cat-full-meta">
+            <div class="cat-full-name">Child Protection</div>
+            <div class="cat-full-tagline">Keeping children safe from harm</div>
+          </div>
+        </div>
+        <div class="cat-full-body">
+          <p class="cat-full-desc">No child should suffer in silence. Human Mirror provides immediate access to child safety hotlines, reporting mechanisms, shelter information, and support for survivors — for children, parents, teachers, and concerned adults.</p>
+          <div class="cat-who">
+            <div class="cat-who-label">Who It Helps</div>
+            <div class="cat-who-list">Children experiencing abuse, neglect, or exploitation. Parents concerned about child safety. Teachers, social workers, and concerned community members.</div>
+          </div>
+          <div class="cat-resources">
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#DC2626;"></div>Childline India — 1098 (Free, 24/7)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#DC2626;"></div>NCPCR — National Commission for Protection of Child Rights</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#DC2626;"></div>Childline UK — 0800 1111</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#DC2626;"></div>UNICEF Child Protection — Global resources</div>
+          </div>
+        </div>
+        <div class="cat-full-footer">
+          <span class="cat-count-badge">2,400+ resources worldwide</span>
+          <a href="emergency.html" class="cat-explore-link">Explore Resources →</a>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="cat-full reveal reveal-delay-2" data-category="growth">
+        <div class="accent-bar" style="background:#2563EB;"></div>
+        <div class="cat-full-header">
+          <div class="cat-full-icon" style="background:#EFF6FF;">📚</div>
+          <div class="cat-full-meta">
+            <div class="cat-full-name">Education</div>
+            <div class="cat-full-tagline">Learning pathways for every human</div>
+          </div>
+        </div>
+        <div class="cat-full-body">
+          <p class="cat-full-desc">Education is a fundamental right. Human Mirror connects people to free learning platforms, scholarship opportunities, literacy programmes, vocational training, and educational support for children and adults who have been denied access.</p>
+          <div class="cat-who">
+            <div class="cat-who-label">Who It Helps</div>
+            <div class="cat-who-list">Children out of school, adults seeking literacy or upskilling, students needing scholarships, parents navigating the education system, refugees, and displaced persons.</div>
+          </div>
+          <div class="cat-resources">
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#2563EB;"></div>Khan Academy — Free education (global)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#2563EB;"></div>UNICEF Education — Out-of-school children</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#2563EB;"></div>Coursera for Social Good — Free courses</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#2563EB;"></div>National Literacy Mission (India)</div>
+          </div>
+        </div>
+        <div class="cat-full-footer">
+          <span class="cat-count-badge">5,000+ resources worldwide</span>
+          <a href="#" class="cat-explore-link">Explore Resources →</a>
+        </div>
+      </div>
+
+      <!-- CAREER GUIDANCE -->
+      <div class="cat-full reveal" data-category="growth">
+        <div class="accent-bar" style="background:#0D9488;"></div>
+        <div class="cat-full-header">
+          <div class="cat-full-icon" style="background:#F0FDFA;">💼</div>
+          <div class="cat-full-meta">
+            <div class="cat-full-name">Career Guidance</div>
+            <div class="cat-full-tagline">Finding your path to meaningful work</div>
+          </div>
+        </div>
+        <div class="cat-full-body">
+          <p class="cat-full-desc">Unemployment and career uncertainty affect mental health, family stability, and dignity. Human Mirror connects people to career counsellors, job placement services, skill development programmes, resume support, and entrepreneurship resources.</p>
+          <div class="cat-who">
+            <div class="cat-who-label">Who It Helps</div>
+            <div class="cat-who-list">Job seekers, career changers, recent graduates, people returning to work after illness or caregiving, youth entering the workforce, and small business starters.</div>
+          </div>
+          <div class="cat-resources">
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#0D9488;"></div>National Career Service Portal (India)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#0D9488;"></div>LinkedIn Learning — Free job skills</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#0D9488;"></div>ILO Career Resources — Global</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#0D9488;"></div>Indeed Job Seeker Resources</div>
+          </div>
+        </div>
+        <div class="cat-full-footer">
+          <span class="cat-count-badge">2,100+ resources worldwide</span>
+          <a href="#" class="cat-explore-link">Explore Resources →</a>
+        </div>
+      </div>
+
+      <!-- LEGAL ASSISTANCE -->
+      <div class="cat-full reveal reveal-delay-1" data-category="crisis">
+        <div class="accent-bar" style="background:#D97706;"></div>
+        <div class="cat-full-header">
+          <div class="cat-full-icon" style="background:#FFFBEB;">⚖️</div>
+          <div class="cat-full-meta">
+            <div class="cat-full-name">Legal Assistance</div>
+            <div class="cat-full-tagline">Know your rights. Get the help you deserve.</div>
+          </div>
+        </div>
+        <div class="cat-full-body">
+          <p class="cat-full-desc">Legal problems can be terrifying without guidance. Human Mirror connects people to free legal aid organisations, rights information, government legal services, advocacy groups, and pro bono lawyers — so that no one is denied justice because they can't afford it.</p>
+          <div class="cat-who">
+            <div class="cat-who-label">Who It Helps</div>
+            <div class="cat-who-list">Individuals facing discrimination, wrongful termination, domestic disputes, housing issues, immigration questions, police encounters, or anyone who needs to understand their legal rights.</div>
+          </div>
+          <div class="cat-resources">
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#D97706;"></div>District Legal Services Authority (India)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#D97706;"></div>Citizens Advice — Free legal help (UK)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#D97706;"></div>Legal Aid Society — USA</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#D97706;"></div>UNHCR Legal Assistance — Refugees globally</div>
+          </div>
+        </div>
+        <div class="cat-full-footer">
+          <span class="cat-count-badge">1,500+ resources worldwide</span>
+          <a href="#" class="cat-explore-link">Explore Resources →</a>
+        </div>
+      </div>
+
+      <!-- WOMEN'S SAFETY -->
+      <div class="cat-full reveal reveal-delay-2" data-category="crisis">
+        <div class="accent-bar" style="background:#DB2777;"></div>
+        <div class="cat-full-header">
+          <div class="cat-full-icon" style="background:#FDF2F8;">💜</div>
+          <div class="cat-full-meta">
+            <div class="cat-full-name">Women's Safety</div>
+            <div class="cat-full-tagline">Safety, dignity, and support for every woman</div>
+          </div>
+        </div>
+        <div class="cat-full-body">
+          <p class="cat-full-desc">Every woman deserves to live free from violence, fear, and discrimination. Human Mirror provides immediate access to domestic violence shelters, women's helplines, legal protection resources, counselling services, and empowerment programmes.</p>
+          <div class="cat-who">
+            <div class="cat-who-label">Who It Helps</div>
+            <div class="cat-who-list">Women experiencing domestic violence, sexual assault, stalking, workplace harassment, or gender-based discrimination. Also supports friends and family members seeking to help.</div>
+          </div>
+          <div class="cat-resources">
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#DB2777;"></div>Women Helpline — 181 (India)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#DB2777;"></div>Refuge — Domestic violence support (UK)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#DB2777;"></div>National DV Hotline — 1-800-799-7233 (US)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#DB2777;"></div>UN Women — Global advocacy and resources</div>
+          </div>
+        </div>
+        <div class="cat-full-footer">
+          <span class="cat-count-badge">1,800+ resources worldwide</span>
+          <a href="emergency.html" class="cat-explore-link">Explore Resources →</a>
+        </div>
+      </div>
+
+      <!-- ELDER SUPPORT -->
+      <div class="cat-full reveal" data-category="community">
+        <div class="accent-bar" style="background:#64748B;"></div>
+        <div class="cat-full-header">
+          <div class="cat-full-icon" style="background:#F8FAFC;">👴</div>
+          <div class="cat-full-meta">
+            <div class="cat-full-name">Elder Support</div>
+            <div class="cat-full-tagline">Dignity and care for older adults</div>
+          </div>
+        </div>
+        <div class="cat-full-body">
+          <p class="cat-full-desc">Elderly individuals often face isolation, neglect, financial abuse, and difficulty accessing services. Human Mirror connects older adults and their families to elder care services, government benefits, social support, mental health resources, and advocacy organisations.</p>
+          <div class="cat-who">
+            <div class="cat-who-label">Who It Helps</div>
+            <div class="cat-who-list">Older adults experiencing isolation, neglect, financial difficulty, or health challenges. Family caregivers, social workers, and anyone concerned about an elderly person's welfare.</div>
+          </div>
+          <div class="cat-resources">
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#64748B;"></div>HelpAge India — Elder advocacy and support</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#64748B;"></div>Elder Care Locator — US government resource</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#64748B;"></div>Age UK — Older persons support</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#64748B;"></div>WHO Ageing Programme — Global</div>
+          </div>
+        </div>
+        <div class="cat-full-footer">
+          <span class="cat-count-badge">1,100+ resources worldwide</span>
+          <a href="#" class="cat-explore-link">Explore Resources →</a>
+        </div>
+      </div>
+
+      <!-- DISABILITY SUPPORT -->
+      <div class="cat-full reveal reveal-delay-1" data-category="community">
+        <div class="accent-bar" style="background:#0284C7;"></div>
+        <div class="cat-full-header">
+          <div class="cat-full-icon" style="background:#F0F9FF;">♿</div>
+          <div class="cat-full-meta">
+            <div class="cat-full-name">Disability Support</div>
+            <div class="cat-full-tagline">Equal access and inclusion for all abilities</div>
+          </div>
+        </div>
+        <div class="cat-full-body">
+          <p class="cat-full-desc">People with disabilities face unique challenges in accessing support, employment, education, and public services. Human Mirror connects individuals and caregivers to disability rights organisations, government schemes, adaptive technology resources, and inclusive employment support.</p>
+          <div class="cat-who">
+            <div class="cat-who-label">Who It Helps</div>
+            <div class="cat-who-list">Individuals with physical, sensory, intellectual, or psychosocial disabilities. Caregivers, parents, employers seeking to be inclusive, and advocates fighting for disability rights.</div>
+          </div>
+          <div class="cat-resources">
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#0284C7;"></div>NIEPMD — National Institute for Disabilities (India)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#0284C7;"></div>Disability Rights UK</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#0284C7;"></div>ADA National Network — USA</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#0284C7;"></div>WHO Disability Action Plan — Global</div>
+          </div>
+        </div>
+        <div class="cat-full-footer">
+          <span class="cat-count-badge">950+ resources worldwide</span>
+          <a href="#" class="cat-explore-link">Explore Resources →</a>
+        </div>
+      </div>
+
+      <!-- ADDICTION RECOVERY -->
+      <div class="cat-full reveal reveal-delay-2" data-category="health">
+        <div class="accent-bar" style="background:#16A34A;"></div>
+        <div class="cat-full-header">
+          <div class="cat-full-icon" style="background:#F0FDF4;">🌱</div>
+          <div class="cat-full-meta">
+            <div class="cat-full-name">Addiction Recovery</div>
+            <div class="cat-full-tagline">Recovery is possible. Help is here.</div>
+          </div>
+        </div>
+        <div class="cat-full-body">
+          <p class="cat-full-desc">Addiction is a health condition, not a moral failure. Human Mirror connects individuals and families to rehabilitation centres, anonymous support groups, counselling services, harm reduction programmes, and recovery communities — without judgment.</p>
+          <div class="cat-who">
+            <div class="cat-who-label">Who It Helps</div>
+            <div class="cat-who-list">Individuals struggling with alcohol, drugs, gambling, pornography, or behavioural addictions. Family members affected by a loved one's addiction. Anyone seeking recovery support.</div>
+          </div>
+          <div class="cat-resources">
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#16A34A;"></div>NIMHANS De-addiction Centre (India)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#16A34A;"></div>Alcoholics Anonymous — Global meetings</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#16A34A;"></div>SAMHSA Helpline — 1-800-662-4357 (US)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#16A34A;"></div>We Are With You — Drugs &amp; alcohol (UK)</div>
+          </div>
+        </div>
+        <div class="cat-full-footer">
+          <span class="cat-count-badge">1,200+ resources worldwide</span>
+          <a href="#" class="cat-explore-link">Explore Resources →</a>
+        </div>
+      </div>
+
+      <!-- FINANCIAL GUIDANCE -->
+      <div class="cat-full reveal" data-category="growth">
+        <div class="accent-bar" style="background:#B45309;"></div>
+        <div class="cat-full-header">
+          <div class="cat-full-icon" style="background:#FEFCE8;">💰</div>
+          <div class="cat-full-meta">
+            <div class="cat-full-name">Financial Guidance</div>
+            <div class="cat-full-tagline">Support for financial hardship and planning</div>
+          </div>
+        </div>
+        <div class="cat-full-body">
+          <p class="cat-full-desc">Financial distress is one of the leading triggers of family breakdown, mental illness, and homelessness. Human Mirror connects people to government welfare programmes, debt counselling, emergency funds, food banks, microfinance options, and financial literacy resources.</p>
+          <div class="cat-who">
+            <div class="cat-who-label">Who It Helps</div>
+            <div class="cat-who-list">Individuals in debt, facing eviction, unable to afford food or utilities, experiencing sudden income loss, or needing guidance on government benefits and entitlements.</div>
+          </div>
+          <div class="cat-resources">
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#B45309;"></div>PM Jan Dhan Yojana — Financial inclusion (India)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#B45309;"></div>StepChange — Free debt advice (UK)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#B45309;"></div>211 — Financial assistance locator (US)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#B45309;"></div>Grameen Bank — Microfinance resources</div>
+          </div>
+        </div>
+        <div class="cat-full-footer">
+          <span class="cat-count-badge">1,700+ resources worldwide</span>
+          <a href="#" class="cat-explore-link">Explore Resources →</a>
+        </div>
+      </div>
+
+      <!-- EMERGENCY ASSISTANCE -->
+      <div class="cat-full reveal reveal-delay-1" data-category="crisis">
+        <div class="accent-bar" style="background:#DC2626;"></div>
+        <div class="cat-full-header">
+          <div class="cat-full-icon" style="background:#FFF5F5;">🚨</div>
+          <div class="cat-full-meta">
+            <div class="cat-full-name">Emergency Assistance</div>
+            <div class="cat-full-tagline">Immediate help when life is on the line</div>
+          </div>
+        </div>
+        <div class="cat-full-body">
+          <p class="cat-full-desc">In a crisis, every second matters. Human Mirror's emergency section provides instant access to local emergency numbers, crisis helplines, suicide prevention resources, disaster relief organisations, and real-time safety guidance — for every country in our database.</p>
+          <div class="cat-who">
+            <div class="cat-who-label">Who It Helps</div>
+            <div class="cat-who-list">Anyone in immediate danger. People in suicidal crisis. Victims of violence needing immediate safety. Disaster-affected communities. Anyone facing a life-threatening situation.</div>
+          </div>
+          <div class="cat-resources">
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#DC2626;"></div>iCall Crisis Line — 9152987821 (India)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#DC2626;"></div>Emergency: 112 (EU), 911 (US), 999 (UK)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#DC2626;"></div>International Association for Suicide Prevention</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#DC2626;"></div>UNHCR Emergency — Displaced populations</div>
+          </div>
+        </div>
+        <div class="cat-full-footer">
+          <span class="cat-count-badge">3,800+ resources worldwide</span>
+          <a href="emergency.html" class="cat-explore-link">Emergency Page →</a>
+        </div>
+      </div>
+
+      <!-- COMMUNITY SUPPORT -->
+      <div class="cat-full reveal reveal-delay-2" data-category="community">
+        <div class="accent-bar" style="background:#3A7D23;"></div>
+        <div class="cat-full-header">
+          <div class="cat-full-icon" style="background:#EAF2E3;">🤝</div>
+          <div class="cat-full-meta">
+            <div class="cat-full-name">Community Support</div>
+            <div class="cat-full-tagline">Belonging, connection, and mutual aid</div>
+          </div>
+        </div>
+        <div class="cat-full-body">
+          <p class="cat-full-desc">Human beings are social creatures. Isolation, exclusion, and lack of belonging are serious risk factors for mental and physical health. Human Mirror connects people to community organisations, volunteering opportunities, peer support groups, cultural centres, and mutual aid networks.</p>
+          <div class="cat-who">
+            <div class="cat-who-label">Who It Helps</div>
+            <div class="cat-who-list">Lonely individuals, newly arrived migrants or refugees, people recovering from isolation, those seeking peer support, and anyone who wants to give or receive help within a community.</div>
+          </div>
+          <div class="cat-resources">
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#3A7D23;"></div>United Way — Community support (Global)</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#3A7D23;"></div>Meetup.com — Community groups globally</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#3A7D23;"></div>Local community centres — Directory by city</div>
+            <div class="cat-resource-item"><div class="cat-resource-dot" style="background:#3A7D23;"></div>Volunteer India — Community volunteering</div>
+          </div>
+        </div>
+        <div class="cat-full-footer">
+          <span class="cat-count-badge">4,600+ resources worldwide</span>
+          <a href="#" class="cat-explore-link">Explore Resources →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:var(--navy);text-align:center;">
+  <div class="section-inner-narrow reveal">
+    <div class="section-tag" style="color:rgba(76,175,48,0.9);">Can't Find What You Need?</div>
+    <h2 class="section-title" style="color:var(--white);">Let our AI <em>navigate</em><br>for you.</h2>
+    <p class="section-desc" style="color:rgba(255,255,255,0.5);margin-bottom:36px;">Simply describe your situation in your own words. Human Mirror's AI will find the right category and the right resources — automatically.</p>
+    <a href="index.html#hero" class="btn btn-green btn-lg">Search For Help Now →</a>
+  </div>
+</section>
+
+<div id="hm-footer"></div>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.getAttribute('data-filter');
+    document.querySelectorAll('.cat-full').forEach(c=>{
+      if(f==='all'||c.getAttribute('data-category')===f){c.style.display='';} else{c.style.display='none';}
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Human Mirror</title>
+<meta name="description" content="Learn about the vision, mission, and values behind Human Mirror — a Global Digital Public Service Platform.">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.mission-split { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+.mission-visual { background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%); border-radius:var(--radius-lg); padding:48px; text-align:center; position:relative; overflow:hidden; }
+.mission-visual::before { content:''; position:absolute; top:-80px; right:-80px; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle,rgba(58,125,35,0.15) 0%,transparent 70%); }
+.mission-visual img { width:130px; height:130px; object-fit:contain; border-radius:50%; margin:0 auto 20px; position:relative; z-index:1; }
+.mission-visual-title { font-family:'Fraunces',serif; font-size:24px; font-weight:600; color:var(--white); margin-bottom:12px; letter-spacing:-0.5px; position:relative; z-index:1; }
+.mission-visual-desc { font-size:14px; color:rgba(255,255,255,0.55); line-height:1.7; font-weight:300; position:relative; z-index:1; }
+.mission-stat { margin-top:28px; position:relative; z-index:1; display:flex; justify-content:center; gap:32px; }
+.ms-item { text-align:center; }
+.ms-num { font-family:'Fraunces',serif; font-size:32px; font-weight:600; color:var(--white); letter-spacing:-1px; }
+.ms-num span { color:rgba(76,175,48,0.9); }
+.ms-lab { font-size:11px; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:1px; }
+.problem-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.problem-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:28px; }
+.problem-icon { font-size:28px; margin-bottom:14px; }
+.problem-title { font-size:16px; font-weight:500; color:var(--navy); margin-bottom:8px; }
+.problem-desc { font-size:13.5px; color:var(--muted); line-height:1.6; font-weight:300; }
+.vision-banner { background:var(--navy); border-radius:var(--radius-lg); padding:56px; text-align:center; position:relative; overflow:hidden; }
+.vision-banner::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle at 50% 50%,rgba(58,125,35,0.1) 0%,transparent 65%); }
+.vision-banner-content { position:relative; z-index:1; max-width:700px; margin:0 auto; }
+.vision-banner-title { font-family:'Fraunces',serif; font-size:clamp(28px,4vw,44px); font-weight:600; color:var(--white); letter-spacing:-1.5px; margin-bottom:16px; line-height:1.15; }
+.vision-banner-title em { font-style:italic; color:rgba(76,175,48,0.9); font-weight:300; }
+.vision-banner-desc { font-size:16px; color:rgba(255,255,255,0.52); line-height:1.7; font-weight:300; }
+.values-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:20px; }
+.value-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:28px 20px; text-align:center; transition:all var(--transition); }
+.value-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+.value-icon { font-size:36px; margin-bottom:16px; }
+.value-title { font-size:15px; font-weight:600; color:var(--navy); margin-bottom:8px; }
+.value-desc { font-size:12.5px; color:var(--muted); line-height:1.55; font-weight:300; }
+.foundation-card { background:linear-gradient(135deg,var(--green-pale) 0%,#fff 100%); border:1px solid rgba(58,125,35,0.2); border-radius:var(--radius-lg); padding:48px; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+.foundation-badge { display:inline-flex; align-items:center; gap:6px; background:var(--green-mid); color:var(--white); font-size:11px; font-weight:500; padding:5px 14px; border-radius:50px; margin-bottom:16px; letter-spacing:1px; text-transform:uppercase; }
+.foundation-title { font-family:'Fraunces',serif; font-size:28px; font-weight:600; color:var(--navy); letter-spacing:-1px; margin-bottom:14px; }
+.foundation-desc { font-size:15px; color:var(--muted); line-height:1.7; font-weight:300; margin-bottom:24px; }
+.foundation-points { display:flex; flex-direction:column; gap:10px; }
+.foundation-point { display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--green); }
+.foundation-point::before { content:'✓'; font-weight:600; flex-shrink:0; margin-top:1px; }
+.foundation-visual { background:var(--white); border-radius:var(--radius); padding:32px; border:1px solid var(--border); text-align:center; }
+.foundation-visual-icon { font-size:64px; margin-bottom:16px; }
+.foundation-visual-title { font-family:'Fraunces',serif; font-size:18px; font-weight:600; color:var(--navy); margin-bottom:8px; }
+.foundation-visual-desc { font-size:13px; color:var(--muted); line-height:1.55; font-weight:300; }
+.team-quote { background:var(--cream); border-left:4px solid var(--green-mid); border-radius:0 var(--radius) var(--radius) 0; padding:28px 32px; font-family:'Fraunces',serif; font-size:20px; font-style:italic; color:var(--navy); line-height:1.5; font-weight:300; margin:40px 0; }
+@media (max-width:1024px) { .values-grid{grid-template-columns:repeat(3,1fr);} .problem-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:768px) { .mission-split{grid-template-columns:1fr;gap:32px;} .foundation-card{grid-template-columns:1fr;gap:28px;} .values-grid{grid-template-columns:repeat(2,1fr);} .problem-grid{grid-template-columns:1fr;} }
+@media (max-width:480px) { .values-grid{grid-template-columns:1fr 1fr;} }
+</style>
+</head>
+<body>
+<div id="hm-nav"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"><div class="page-hero-dots"></div></div>
+  <div class="page-hero-content">
+    <div class="page-breadcrumb"><a href="index.html">Home</a> › About</div>
+    <div class="page-badge">Our Story</div>
+    <h1 class="page-title">We believe <em>every human</em><br>deserves to be helped.</h1>
+    <p class="page-subtitle">Human Mirror was born from a simple but powerful observation: millions of people are suffering in silence — not because help doesn't exist, but because they can't find it.</p>
+  </div>
+</section>
+
+<!-- MISSION SPLIT -->
+<section class="section" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="mission-split">
+      <div class="reveal">
+        <div class="section-tag">Our Mission</div>
+        <h2 class="section-title" style="text-align:left;font-size:38px;">"Connecting Every Human<br><em>To The Help They Need."</em></h2>
+        <div class="gold-line gold-line-left"></div>
+        <p style="font-size:16px;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:20px;">This is not just a tagline. It is the reason Human Mirror exists. Every word matters — <em>every</em> human, not just those with resources. <em>The help they need</em>, not the help that is easiest to give.</p>
+        <p style="font-size:16px;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:28px;">We are building the world's most comprehensive, trusted, and accessible human assistance platform — a place where anyone, anywhere, facing anything, can find the right support, information, or guidance within minutes.</p>
+        <a href="how-it-works.html" class="btn btn-primary">See How It Works →</a>
+      </div>
+      <div class="mission-visual reveal">
+        <img src="assets/images/logo.jpeg" alt="Human Mirror"/>
+        <div class="mission-visual-title">Reflect. Learn. Improve.</div>
+        <div class="mission-visual-desc">A global platform built on the belief that human dignity begins with access to the right help at the right time.</div>
+        <div class="mission-stat">
+          <div class="ms-item"><div class="ms-num">195<span>+</span></div><div class="ms-lab">Countries</div></div>
+          <div class="ms-item"><div class="ms-num">50<span>K+</span></div><div class="ms-lab">Resources</div></div>
+          <div class="ms-item"><div class="ms-num">10<span>+</span></div><div class="ms-lab">Categories</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY HM EXISTS -->
+<section class="section" style="background:var(--cream)">
+  <div class="section-inner-narrow">
+    <div class="section-header reveal">
+      <div class="section-tag">Why Human Mirror Exists</div>
+      <h2 class="section-title">The gap between <em>need and help</em><br>should not exist.</h2>
+    </div>
+    <div class="reveal" style="font-size:16px;color:var(--muted);line-height:1.8;font-weight:300;">
+      <p style="margin-bottom:18px;">Every day, millions of people wake up facing crises they don't know how to navigate. A child being abused doesn't know which number to call. A woman fleeing violence doesn't know where to find shelter. A young person struggling with addiction doesn't know which door to knock on. A parent doesn't know how to access their legal rights. An elderly person doesn't know what government services are available to them.</p>
+      <p style="margin-bottom:18px;">The information exists. The resources exist. The people willing to help exist. But the connection is broken. The navigation layer is missing. That is what Human Mirror provides: <strong style="color:var(--navy);">the navigation layer between every human being and the help they need.</strong></p>
+      <p>We are not trying to replace counselors, governments, NGOs, or community organisations. We are the bridge that helps people find them — faster, more accurately, and with the dignity every human deserves.</p>
+    </div>
+    <blockquote class="team-quote reveal">"The world already has the answers. Human Mirror simply helps every person find the one meant for them."</blockquote>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="section" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">The Problem We Are Solving</div>
+      <h2 class="section-title">Millions in need.<br><em>Help exists — but unreachable.</em></h2>
+      <p class="section-desc">Six universal problems that Human Mirror is built to solve.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal"><div class="problem-icon">🌐</div><div class="problem-title">Information Fragmentation</div><div class="problem-desc">Help resources are scattered across thousands of websites, hotlines, and agencies. No single place brings them together intelligently.</div></div>
+      <div class="problem-card reveal reveal-delay-1"><div class="problem-icon">🗺️</div><div class="problem-title">No Navigation Layer</div><div class="problem-desc">People in crisis don't know which agency to contact, which helpline to call, or which organisation can actually help their specific situation.</div></div>
+      <div class="problem-card reveal reveal-delay-2"><div class="problem-icon">🌍</div><div class="problem-title">Language Barriers</div><div class="problem-desc">Most help resources are in English or major languages only, leaving billions of people in regional languages without accessible guidance.</div></div>
+      <div class="problem-card reveal reveal-delay-3"><div class="problem-icon">📍</div><div class="problem-title">Location Disconnect</div><div class="problem-desc">People often find resources from other countries or states that cannot help them. Local context is critical and almost universally missing.</div></div>
+      <div class="problem-card reveal reveal-delay-4"><div class="problem-icon">🔒</div><div class="problem-title">Fear and Stigma</div><div class="problem-desc">Many people hesitate to seek help for mental health, addiction, or abuse. A private, non-judgmental platform lowers this barrier significantly.</div></div>
+      <div class="problem-card reveal"><div class="problem-icon">📱</div><div class="problem-title">Digital Exclusion</div><div class="problem-desc">Vulnerable populations often have limited digital access. Human Mirror is designed to work on low-bandwidth connections and older devices.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="section" style="background:var(--off-white)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Our Long-Term Vision</div>
+      <h2 class="section-title">The world's most trusted<br><em>human assistance platform.</em></h2>
+    </div>
+    <div class="vision-banner reveal">
+      <div class="vision-banner-content">
+        <h3 class="vision-banner-title">A world where <em>no one suffers alone</em><br>for lack of knowing where to turn.</h3>
+        <p class="vision-banner-desc" style="margin-top:16px;">By 2030, Human Mirror aims to be available in every country on Earth, in every major language, with a real-time resource database covering every category of human need. We envision a future where a child in a remote village in India, a woman in a shelter in Brazil, and an elderly person in Japan can all access trusted help within seconds — through any device, in any language.</p>
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:32px;">
+      <div class="card reveal" style="text-align:center;background:var(--cream);">
+        <div style="font-size:32px;margin-bottom:12px;">🌱</div>
+        <div style="font-size:15px;font-weight:500;color:var(--navy);margin-bottom:8px;">2025 — Foundation</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">Launch in India, UAE, and USA with 10 core categories and AI-powered navigation.</div>
+      </div>
+      <div class="card reveal reveal-delay-1" style="text-align:center;background:var(--cream);">
+        <div style="font-size:32px;margin-bottom:12px;">🚀</div>
+        <div style="font-size:15px;font-weight:500;color:var(--navy);margin-bottom:8px;">2027 — Scale</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">Expand to 50 countries, launch mobile app, 40+ languages, and volunteer network.</div>
+      </div>
+      <div class="card reveal reveal-delay-2" style="text-align:center;background:var(--cream);">
+        <div style="font-size:32px;margin-bottom:12px;">🌍</div>
+        <div style="font-size:15px;font-weight:500;color:var(--navy);margin-bottom:8px;">2030 — Global</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">All 195 countries. UN partnerships. Real-time crisis response. 1M+ volunteers.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDATION -->
+<section class="section" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Human Mirror Foundation</div>
+      <h2 class="section-title">Building the <em>institutional backbone</em><br>for lasting global impact.</h2>
+    </div>
+    <div class="foundation-card reveal">
+      <div>
+        <div class="foundation-badge">Coming Soon</div>
+        <div class="foundation-title">Human Mirror Foundation</div>
+        <p class="foundation-desc">The Human Mirror Foundation will be the non-profit entity that ensures the platform remains free, independent, and mission-driven forever. Inspired by the Wikipedia Foundation model, it will be funded by individuals, philanthropists, and ethical corporate partners who believe in universal access to help.</p>
+        <div class="foundation-points">
+          <div class="foundation-point">Permanently free for all users — everywhere</div>
+          <div class="foundation-point">Independent, non-partisan governance</div>
+          <div class="foundation-point">Annual transparency reports published publicly</div>
+          <div class="foundation-point">Global advisory board of social justice leaders</div>
+          <div class="foundation-point">Research grants for human welfare innovation</div>
+        </div>
+      </div>
+      <div class="foundation-visual">
+        <div class="foundation-visual-icon">🏛️</div>
+        <div class="foundation-visual-title">A Foundation For Humanity</div>
+        <div class="foundation-visual-desc" style="margin-top:8px;">Structured to serve every human on Earth, forever — not for profit, not for politics, but for people.</div>
+        <div style="margin-top:24px;display:flex;flex-direction:column;gap:10px;">
+          <div style="background:var(--green-pale);border-radius:var(--radius-sm);padding:12px 16px;font-size:13px;color:var(--green);font-weight:300;text-align:left;"><strong style="font-weight:500;">Mission-Locked</strong> — Core mission cannot be changed by any future leadership</div>
+          <div style="background:var(--surface);border-radius:var(--radius-sm);padding:12px 16px;font-size:13px;color:var(--muted);font-weight:300;text-align:left;"><strong style="font-weight:500;color:var(--navy);">Public Benefit</strong> — Registered as a public benefit organisation globally</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE VALUES -->
+<section class="section" style="background:var(--cream)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Core Values</div>
+      <h2 class="section-title">The principles that<br><em>guide everything we do.</em></h2>
+      <p class="section-desc">Five values that are not aspirational — they are operational. Every decision we make is filtered through them.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="value-icon">❤️</div>
+        <div class="value-title">Humanity</div>
+        <div class="value-desc">Every feature, every decision, and every resource is evaluated by one question: does this serve the dignity and wellbeing of the human being who needs help?</div>
+      </div>
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-icon">🌐</div>
+        <div class="value-title">Accessibility</div>
+        <div class="value-desc">Help must be available to everyone — regardless of language, device, bandwidth, disability, or digital literacy. No human left behind.</div>
+      </div>
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-icon">🛡️</div>
+        <div class="value-title">Trust</div>
+        <div class="value-desc">Every resource on Human Mirror is verified. We only surface information we can stand behind. Trust is the foundation of every interaction.</div>
+      </div>
+      <div class="value-card reveal reveal-delay-3">
+        <div class="value-icon">🔒</div>
+        <div class="value-title">Privacy</div>
+        <div class="value-desc">Seeking help is a deeply personal act. We store no personal data. We track no identities. What you share with Human Mirror stays with you.</div>
+      </div>
+      <div class="value-card reveal reveal-delay-4">
+        <div class="value-icon">🤝</div>
+        <div class="value-title">Inclusion</div>
+        <div class="value-desc">We serve people of every gender, age, religion, background, and nationality equally. Human Mirror has no hierarchy of who deserves help.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:var(--navy);text-align:center;">
+  <div class="section-inner-narrow">
+    <div class="reveal">
+      <div class="section-tag" style="color:rgba(76,175,48,0.9);">Join The Mission</div>
+      <h2 class="section-title" style="color:var(--white);">You can help us<br><em>change the world.</em></h2>
+      <p class="section-desc" style="color:rgba(255,255,255,0.5);margin-bottom:36px;">Whether you volunteer, partner, or simply share Human Mirror with someone who needs it — you are part of the mission.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="volunteer.html" class="btn btn-green btn-lg">Become a Volunteer</a>
+        <a href="partner.html" class="btn btn-outline-white btn-lg">Partner With Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="hm-footer"></div>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

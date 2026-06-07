@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner With Us — Human Mirror</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.partner-types{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:60px;}
+.partner-type-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px;transition:all .25s;position:relative;overflow:hidden;}
+.partner-type-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--pt-color,var(--green-mid));transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.partner-type-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent;}
+.partner-type-card:hover::after{transform:scaleX(1);}
+.pt-icon{font-size:44px;margin-bottom:18px;}
+.pt-title{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--navy);letter-spacing:-0.5px;margin-bottom:10px;}
+.pt-desc{font-size:14px;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:18px;}
+.pt-benefits{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.pt-benefit{font-size:13.5px;color:var(--navy);display:flex;align-items:flex-start;gap:8px;}
+.pt-benefit::before{content:'✓';color:var(--green-mid);font-weight:700;flex-shrink:0;}
+.pt-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;padding:5px 12px;border-radius:50px;border:1px solid;letter-spacing:.5px;text-transform:uppercase;}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.why-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:26px;text-align:center;transition:all .2s;}
+.why-card:hover{border-color:var(--green-mid);box-shadow:var(--shadow-soft);}
+.why-icon{font-size:32px;margin-bottom:12px;}
+.why-title{font-size:15px;font-weight:500;color:var(--navy);margin-bottom:8px;}
+.why-desc{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;}
+.process-timeline{display:flex;flex-direction:column;gap:0;}
+.timeline-item{display:grid;grid-template-columns:80px 1fr;gap:28px;position:relative;}
+.timeline-item:not(:last-child)::before{content:'';position:absolute;left:39px;top:56px;bottom:-16px;width:2px;background:var(--green-pale);}
+.tl-circle{width:80px;height:80px;border-radius:50%;background:var(--green-pale);border:2px solid var(--green-mid);display:flex;align-items:center;justify-content:center;flex-direction:column;flex-shrink:0;position:relative;z-index:1;}
+.tl-num{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--green-mid);}
+.tl-body{padding:16px 0 32px;}
+.tl-title{font-size:17px;font-weight:600;color:var(--navy);margin-bottom:6px;}
+.tl-desc{font-size:14px;color:var(--muted);line-height:1.65;font-weight:300;}
+.partner-logos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.partner-logo-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;transition:all .2s;min-height:100px;}
+.partner-logo-card:hover{border-color:var(--green-mid);box-shadow:var(--shadow-soft);}
+.plc-icon{font-size:32px;}
+.plc-name{font-size:13px;font-weight:500;color:var(--navy);}
+.plc-type{font-size:11px;color:var(--muted);}
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-soft);}
+.form-success{display:none;flex-direction:column;align-items:center;text-align:center;padding:40px;gap:12px;}
+.form-success-icon{font-size:48px;}
+.form-success-title{font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:var(--navy);}
+.form-success-desc{font-size:15px;color:var(--muted);font-weight:300;}
+@media(max-width:1024px){.partner-types{grid-template-columns:1fr;} .partner-logos{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:768px){.why-grid{grid-template-columns:1fr;} .timeline-item{grid-template-columns:60px 1fr;gap:20px;} .tl-circle{width:60px;height:60px;} .timeline-item:not(:last-child)::before{left:29px;} .partner-logos{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<div id="hm-nav"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"><div class="page-hero-dots"></div></div>
+  <div class="page-hero-content">
+    <div class="page-breadcrumb"><a href="index.html">Home</a> › Partner With Us</div>
+    <div class="page-badge">Partnerships</div>
+    <h1 class="page-title">Together we can<br>reach <em>every human</em><br>who needs help.</h1>
+    <p class="page-subtitle">Human Mirror partners with NGOs, government agencies, educational institutions, and corporations to expand our global reach and deepen our impact.</p>
+  </div>
+</section>
+
+<!-- PARTNER TYPES -->
+<section class="section" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Partnership Types</div>
+      <h2 class="section-title">Four ways to<br><em>partner with us.</em></h2>
+      <p class="section-desc">Whether you are an NGO, a government body, a university, or a company — there is a meaningful partnership model designed for you.</p>
+    </div>
+    <div class="partner-types">
+
+      <div class="partner-type-card reveal" style="--pt-color:#DC2626;">
+        <div class="pt-icon">🤝</div>
+        <div class="pt-title">NGO & Civil Society Partners</div>
+        <p class="pt-desc">If your organisation provides support services — whether in mental health, child protection, women's safety, legal aid, or any other area — list your services on Human Mirror and reach the millions of people who need you most.</p>
+        <div class="pt-benefits">
+          <div class="pt-benefit">Free listing in the Human Mirror verified resource directory</div>
+          <div class="pt-benefit">Direct referrals from our AI navigation engine</div>
+          <div class="pt-benefit">Co-branded awareness campaigns and resources</div>
+          <div class="pt-benefit">Access to our global volunteer network</div>
+          <div class="pt-benefit">Monthly impact reports on referral traffic</div>
+        </div>
+        <span class="pt-badge" style="color:#DC2626;border-color:#FECACA;background:#FFF5F5;">For NGOs & Charities</span>
+      </div>
+
+      <div class="partner-type-card reveal reveal-delay-1" style="--pt-color:#2563EB;">
+        <div class="pt-icon">🏛️</div>
+        <div class="pt-title">Government Agency Partners</div>
+        <p class="pt-desc">Government departments and public services can partner with Human Mirror to ensure their helplines, schemes, portals, and support services are accurately listed and easily discoverable by citizens who need them — in their language, in their location.</p>
+        <div class="pt-benefits">
+          <div class="pt-benefit">Official government listing with verified badge</div>
+          <div class="pt-benefit">API integration for real-time scheme information</div>
+          <div class="pt-benefit">Multilingual resource pages in regional languages</div>
+          <div class="pt-benefit">Priority placement in location-based search results</div>
+          <div class="pt-benefit">Joint public awareness campaigns</div>
+        </div>
+        <span class="pt-badge" style="color:#2563EB;border-color:#BFDBFE;background:#EFF6FF;">For Government Agencies</span>
+      </div>
+
+      <div class="partner-type-card reveal" style="--pt-color:#7C3AED;">
+        <div class="pt-icon">🎓</div>
+        <div class="pt-title">Educational Institution Partners</div>
+        <p class="pt-desc">Universities, schools, and training institutes can partner with Human Mirror to provide students and staff with access to mental health resources, career guidance, scholarship information, and student welfare services — all through the platform.</p>
+        <div class="pt-benefits">
+          <div class="pt-benefit">Custom Human Mirror portal for your institution</div>
+          <div class="pt-benefit">Student mental health and wellbeing resources</div>
+          <div class="pt-benefit">Career guidance and scholarship directory integration</div>
+          <div class="pt-benefit">Research collaboration opportunities</div>
+          <div class="pt-benefit">Student volunteer programme co-certification</div>
+        </div>
+        <span class="pt-badge" style="color:#7C3AED;border-color:#DDD6FE;background:#F5F3FF;">For Schools & Universities</span>
+      </div>
+
+      <div class="partner-type-card reveal reveal-delay-1" style="--pt-color:#D97706;">
+        <div class="pt-icon">🏢</div>
+        <div class="pt-title">Corporate Partners</div>
+        <p class="pt-desc">Purpose-driven companies can support Human Mirror's mission through ethical corporate partnerships — funding platform development, sponsoring resource curation in specific regions, supporting employee volunteering, or integrating Human Mirror into their employee wellbeing programmes.</p>
+        <div class="pt-benefits">
+          <div class="pt-benefit">Named sponsorship of specific global regions or categories</div>
+          <div class="pt-benefit">Employee volunteer programme through Human Mirror</div>
+          <div class="pt-benefit">ESG and CSR impact reporting and certification</div>
+          <div class="pt-benefit">Co-branded awareness campaigns</div>
+          <div class="pt-benefit">Ethical partnership — no advertising or data access</div>
+        </div>
+        <span class="pt-badge" style="color:#D97706;border-color:#FDE68A;background:#FFFBEB;">For Companies & Corporates</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY PARTNER -->
+<section class="section" style="background:var(--cream)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Why Partner With Human Mirror</div>
+      <h2 class="section-title">Scale your impact<br><em>beyond your borders.</em></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">🌍</div>
+        <div class="why-title">Global Reach</div>
+        <div class="why-desc">Connect with people across 195 countries who are actively searching for help in your category — right when they need it most.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">🤖</div>
+        <div class="why-title">AI-Powered Referrals</div>
+        <div class="why-desc">Our AI navigation engine proactively matches people to your services based on their specific situation, location, and language — not passive search.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">📊</div>
+        <div class="why-title">Impact Measurement</div>
+        <div class="why-desc">Receive monthly reports showing how many people were referred to your services, from which regions, and through which categories.</div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">🛡️</div>
+        <div class="why-title">Verified & Trusted</div>
+        <div class="why-desc">The Human Mirror verified badge signals to users that your organisation has been reviewed for legitimacy, quality, and mission alignment.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">🌱</div>
+        <div class="why-title">Mission-Aligned</div>
+        <div class="why-desc">Human Mirror will never monetise your partnership through advertising or data sharing. Every partnership is structured purely around human impact.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">🤝</div>
+        <div class="why-title">Community of Good</div>
+        <div class="why-desc">Join a growing global network of organisations committed to ensuring no human suffers in silence for lack of knowing where to turn.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXISTING PARTNERS -->
+<section class="section" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Our Partners</div>
+      <h2 class="section-title">Organisations we're<br><em>proud to work with.</em></h2>
+    </div>
+    <div class="partner-logos">
+      <div class="partner-logo-card reveal"><div class="plc-icon">🌍</div><div class="plc-name">UNICEF</div><div class="plc-type">UN Agency • Global</div></div>
+      <div class="partner-logo-card reveal reveal-delay-1"><div class="plc-icon">🏛️</div><div class="plc-name">UNHCR</div><div class="plc-type">UN Agency • Global</div></div>
+      <div class="partner-logo-card reveal reveal-delay-2"><div class="plc-icon">❤️</div><div class="plc-name">Red Cross</div><div class="plc-type">INGO • Global</div></div>
+      <div class="partner-logo-card reveal reveal-delay-3"><div class="plc-icon">👩</div><div class="plc-name">UN Women</div><div class="plc-type">UN Agency • Global</div></div>
+      <div class="partner-logo-card reveal"><div class="plc-icon">🇮🇳</div><div class="plc-name">Childline India</div><div class="plc-type">NGO • India</div></div>
+      <div class="partner-logo-card reveal reveal-delay-1"><div class="plc-icon">🧠</div><div class="plc-name">iCall TISS</div><div class="plc-type">Mental Health • India</div></div>
+      <div class="partner-logo-card reveal reveal-delay-2"><div class="plc-icon">🏠</div><div class="plc-name">Refuge UK</div><div class="plc-type">NGO • UK</div></div>
+      <div class="partner-logo-card reveal reveal-delay-3"><div class="plc-icon">🌐</div><div class="plc-name">Your Organisation</div><div class="plc-type">Apply to Partner →</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" style="background:var(--cream)">
+  <div class="section-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
+    <div class="reveal">
+      <div class="section-tag">Partnership Process</div>
+      <h2 class="section-title" style="text-align:left;font-size:34px;">How to become<br><em>a partner.</em></h2>
+      <p style="font-size:15px;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:36px;">Our partnership process is simple, transparent, and built around mission alignment. We do not accept partners whose values conflict with human dignity, privacy, or inclusion.</p>
+      <div class="process-timeline">
+        <div class="timeline-item"><div class="tl-circle"><div class="tl-num">1</div></div><div class="tl-body"><div class="tl-title">Submit an Enquiry</div><div class="tl-desc">Fill in the partnership inquiry form with details about your organisation, your services, and the type of partnership you are seeking.</div></div></div>
+        <div class="timeline-item"><div class="tl-circle"><div class="tl-num">2</div></div><div class="tl-body"><div class="tl-title">Mission Alignment Review</div><div class="tl-desc">Our team reviews your organisation to ensure alignment with Human Mirror's values of humanity, trust, privacy, and inclusion — typically within 5 business days.</div></div></div>
+        <div class="timeline-item"><div class="tl-circle"><div class="tl-num">3</div></div><div class="tl-body"><div class="tl-title">Partnership Call</div><div class="tl-desc">We schedule a call to discuss the specific partnership structure, what you offer, and how Human Mirror can best connect people to your services.</div></div></div>
+        <div class="timeline-item"><div class="tl-circle"><div class="tl-num">4</div></div><div class="tl-body"><div class="tl-title">Go Live</div><div class="tl-desc">Your services are listed, verified, and activated in the Human Mirror platform — with AI-powered referrals starting immediately.</div></div></div>
+      </div>
+    </div>
+
+    <!-- INQUIRY FORM -->
+    <div class="reveal">
+      <div class="form-card">
+        <div class="form-success" id="partnerFormSuccess">
+          <div class="form-success-icon">🤝</div>
+          <div class="form-success-title">Enquiry Received!</div>
+          <div class="form-success-desc">Thank you for your interest in partnering with Human Mirror. Our team will review your enquiry and respond within 5 business days.</div>
+        </div>
+        <form class="hm-form" id="partnerForm">
+          <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--navy);margin-bottom:4px;letter-spacing:-0.5px;">Partnership Inquiry</h3>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:24px;font-weight:300;">Tell us about your organisation and how you'd like to partner.</p>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Your Name *</label><input class="form-input" type="text" placeholder="Full name" required></div>
+            <div class="form-group"><label class="form-label">Job Title *</label><input class="form-input" type="text" placeholder="e.g. Director" required></div>
+          </div>
+          <div class="form-group"><label class="form-label">Organisation Name *</label><input class="form-input" type="text" placeholder="Your organisation" required></div>
+          <div class="form-group"><label class="form-label">Organisation Email *</label><input class="form-input" type="email" placeholder="official@organisation.org" required></div>
+          <div class="form-group"><label class="form-label">Organisation Website</label><input class="form-input" type="url" placeholder="https://yourorg.org"></div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Organisation Type *</label>
+              <select class="form-select" required>
+                <option value="">Select type</option>
+                <option>NGO / Charity</option>
+                <option>Government Agency</option>
+                <option>Educational Institution</option>
+                <option>Corporate / Company</option>
+                <option>UN / International Agency</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Countries of Operation *</label><input class="form-input" type="text" placeholder="e.g. India, UAE, Global" required></div>
+          </div>
+          <div class="form-group"><label class="form-label">Help Categories You Cover *</label>
+            <select class="form-select" required>
+              <option value="">Select primary category</option>
+              <option>Mental Health</option><option>Child Protection</option><option>Women's Safety</option>
+              <option>Education</option><option>Career Guidance</option><option>Legal Assistance</option>
+              <option>Elder Support</option><option>Disability Support</option><option>Addiction Recovery</option>
+              <option>Financial Guidance</option><option>Emergency Assistance</option><option>Community Support</option>
+              <option>Multiple / All</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Partnership Interest *</label><textarea class="form-textarea" placeholder="Describe what you do, who you serve, and how you envision partnering with Human Mirror..." style="min-height:100px;" required></textarea></div>
+          <div class="form-group" style="display:flex;align-items:flex-start;gap:10px;"><input type="checkbox" id="partner-consent" style="margin-top:3px;flex-shrink:0;" required><label for="partner-consent" style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.5;">I confirm that my organisation's mission aligns with Human Mirror's values of humanity, trust, privacy, and inclusion.</label></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Submit Partnership Inquiry →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--navy);text-align:center;">
+  <div class="section-inner-narrow reveal">
+    <div class="section-tag" style="color:rgba(76,175,48,0.9);">Questions?</div>
+    <h2 class="section-title" style="color:var(--white);">Let's start a<br><em>conversation.</em></h2>
+    <p class="section-desc" style="color:rgba(255,255,255,0.5);margin-bottom:36px;">Not sure which partnership model is right for you? Contact our partnerships team and we'll find the best way to work together.</p>
+    <a href="contact.html" class="btn btn-green btn-lg">Contact Our Team →</a>
+  </div>
+</section>
+
+<div id="hm-footer"></div>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+document.getElementById('partnerForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  this.style.display='none';
+  document.getElementById('partnerFormSuccess').style.display='flex';
+});
+</script>
+</body>
+</html>
