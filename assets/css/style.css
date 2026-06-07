@@ -84,7 +84,7 @@ input,select,textarea{font-family:inherit;}
 
 /* Logo */
 .hm-nav-logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.hm-nav-logo-img{width:46px;height:46px;border-radius:50%;object-fit:contain;flex-shrink:0;}
+.hm-nav-logo-img{width:64px;height:64px;border-radius:50%;object-fit:contain;flex-shrink:0;}
 .hm-nav-brand-wrap{display:flex;flex-direction:column;line-height:1.15;}
 .hm-nav-brand{font-family:'Fraunces',serif;font-size:17px;font-weight:600;letter-spacing:-0.3px;white-space:nowrap;}
 .hm-brand-human{color:var(--navy);}
