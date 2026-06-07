@@ -1,4 +1,3 @@
-cat > /mnt/user-data/outputs/human-mirror/assets/js/layout.js << 'EOF'
 /* ============================================================
    HUMAN MIRROR — LAYOUT INJECTOR v3.0
    Nav + Footer injected on every page. GitHub Pages ready.
@@ -173,5 +172,3 @@ cat > /mnt/user-data/outputs/human-mirror/assets/js/layout.js << 'EOF'
     document.addEventListener('DOMContentLoaded', inject);
   } else { inject(); }
 })();
-EOF
-echo "layout.js: $(wc -c < /mnt/user-data/outputs/human-mirror/assets/js/layout.js) bytes"
