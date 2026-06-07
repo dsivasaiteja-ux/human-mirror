@@ -1,261 +1,180 @@
+cat > /mnt/user-data/outputs/human-mirror/assets/js/main.js << 'EOF'
 /* ============================================================
-   HUMAN MIRROR — MAIN JS v2.0
-   Runs after layout.js has injected nav + footer.
+   HUMAN MIRROR — MAIN JS v3.0
    ============================================================ */
-
-(function () {
+(function(){
   'use strict';
 
-  function init() {
+  function init(){
 
-    /* ── 1. NAV SCROLL SHADOW ─────────────────────────────── */
-    var navbar = document.getElementById('hm-navbar');
-    if (navbar) {
-      var onScroll = function () {
-        navbar.classList.toggle('hm-nav-scrolled', window.scrollY > 20);
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
+    /* 1. NAV SCROLL */
+    var nav = document.getElementById('hm-navbar');
+    if(nav){
+      var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 18); };
+      window.addEventListener('scroll', onScroll, {passive:true});
       onScroll();
     }
 
-    /* ── 2. ACTIVE NAV LINK ───────────────────────────────── */
-    var page = window.location.pathname.replace(/\/$/, '').split('/').pop() || 'index.html';
-    document.querySelectorAll('.hm-nav-link, .hm-mobile-link').forEach(function (a) {
-      var href = (a.getAttribute('href') || '').split('#')[0].split('/').pop();
-      if (href === page) {
-        a.classList.add('active');
-        a.setAttribute('aria-current', 'page');
-      }
+    /* 2. ACTIVE LINK */
+    var page = window.location.pathname.replace(/\/$/,'').split('/').pop() || 'index.html';
+    document.querySelectorAll('.hm-nav-a, .hm-mob-a').forEach(function(a){
+      var h = (a.getAttribute('href')||'').split('#')[0].split('/').pop();
+      if(h === page){ a.classList.add('active'); a.setAttribute('aria-current','page'); }
     });
 
-    /* ── 3. MOBILE HAMBURGER ──────────────────────────────── */
-    var hamburger = document.getElementById('hm-hamburger');
-    var mobileMenu = document.getElementById('hm-mobile-menu');
-    var overlay    = document.getElementById('hm-mobile-overlay');
+    /* 3. MOBILE MENU */
+    var burger  = document.getElementById('hm-burger');
+    var mob     = document.getElementById('hm-mob');
+    var overlay = document.getElementById('hm-overlay');
 
-    function openMenu() {
-      mobileMenu.classList.add('open');
-      overlay.classList.add('open');
-      hamburger.setAttribute('aria-expanded', 'true');
-      mobileMenu.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      var spans = hamburger.querySelectorAll('span');
-      spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-      spans[1].style.opacity = '0';
-      spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+    function openMenu(){
+      mob.classList.add('open'); overlay.classList.add('open');
+      burger.setAttribute('aria-expanded','true');
+      mob.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+      var s = burger.querySelectorAll('span');
+      s[0].style.transform='rotate(45deg) translate(5px,5px)';
+      s[1].style.opacity='0';
+      s[2].style.transform='rotate(-45deg) translate(5px,-5px)';
+    }
+    function closeMenu(){
+      mob.classList.remove('open'); overlay.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+      mob.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+      burger.querySelectorAll('span').forEach(function(s){ s.style.transform=''; s.style.opacity=''; });
+    }
+    if(burger && mob){
+      burger.addEventListener('click', function(){ mob.classList.contains('open') ? closeMenu() : openMenu(); });
+      if(overlay) overlay.addEventListener('click', closeMenu);
+      mob.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+      document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMenu(); });
     }
 
-    function closeMenu() {
-      mobileMenu.classList.remove('open');
-      overlay.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      mobileMenu.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      var spans = hamburger.querySelectorAll('span');
-      spans.forEach(function (s) { s.style.transform = ''; s.style.opacity = ''; });
-    }
+    /* 4. SCROLL REVEAL */
+    var revs = document.querySelectorAll('.reveal');
+    if(revs.length && 'IntersectionObserver' in window){
+      var rObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); rObs.unobserve(e.target); } });
+      },{threshold:0.07, rootMargin:'0px 0px -36px 0px'});
+      revs.forEach(function(el){ rObs.observe(el); });
+    } else { revs.forEach(function(el){ el.classList.add('visible'); }); }
 
-    if (hamburger && mobileMenu) {
-      hamburger.addEventListener('click', function () {
-        mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+    /* 5. COUNTER ANIMATION */
+    document.querySelectorAll('.count-up').forEach(function(el){
+      var target = parseInt(el.getAttribute('data-target'),10)||0;
+      if(!('IntersectionObserver' in window)){ el.textContent=target.toLocaleString(); return; }
+      var obs = new IntersectionObserver(function(entries){
+        if(!entries[0].isIntersecting) return;
+        obs.unobserve(el);
+        var start=null, dur=1800;
+        function step(ts){
+          if(!start) start=ts;
+          var p = Math.min((ts-start)/dur,1);
+          var e = 1-Math.pow(1-p,3);
+          el.textContent = Math.floor(e*target).toLocaleString();
+          if(p<1) requestAnimationFrame(step);
+          else el.textContent = target.toLocaleString();
+        }
+        requestAnimationFrame(step);
+      },{threshold:.5});
+      obs.observe(el);
+    });
+
+    /* 6. SMOOTH SCROLL (offset for fixed nav) */
+    var navH = function(){ var n=document.getElementById('hm-navbar'); return n ? n.offsetHeight+12 : 80; };
+    document.querySelectorAll('a[href*="#"]').forEach(function(a){
+      a.addEventListener('click',function(e){
+        var parts=(a.getAttribute('href')||'').split('#');
+        var pg=parts[0], hash=parts[1];
+        if(!hash) return;
+        var sameOrEmpty = !pg || pg===page || pg==='index.html' && (page===''||page==='index.html');
+        if(sameOrEmpty){
+          var t=document.getElementById(hash);
+          if(t){ e.preventDefault(); window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-navH(),behavior:'smooth'}); }
+        }
       });
-      if (overlay) overlay.addEventListener('click', closeMenu);
-      mobileMenu.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', closeMenu);
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeMenu();
-      });
-    }
+    });
 
-    /* ── 4. SCROLL REVEAL ─────────────────────────────────── */
-    var reveals = document.querySelectorAll('.reveal');
-    if (reveals.length && 'IntersectionObserver' in window) {
-      var revealObs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            revealObs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-      reveals.forEach(function (el) { revealObs.observe(el); });
-    } else {
-      reveals.forEach(function (el) { el.classList.add('visible'); });
-    }
-
-    /* ── 5. GEOLOCATION HINT ──────────────────────────────── */
-    var locText = document.getElementById('locationText');
-    if (locText && 'geolocation' in navigator) {
+    /* 7. GEOLOCATION HINT */
+    var locEl = document.getElementById('loc-hint');
+    if(locEl && 'geolocation' in navigator){
       navigator.geolocation.getCurrentPosition(
-        function () {
-          locText.textContent = '📍 Location detected — showing resources relevant to your area.';
-          locText.style.color = '#3A7D23';
-        },
-        function () {
-          locText.textContent = '📍 Enable location for hyper-local resources, or browse all countries.';
-        },
-        { timeout: 5000 }
+        function(){ locEl.textContent='📍 Location detected — showing nearby resources.'; locEl.style.color='var(--green-mid)'; },
+        function(){ locEl.textContent='📍 Browse resources by country using our directory.'; },
+        {timeout:5000}
       );
     }
 
-    /* ── 6. SEARCH CHIPS ──────────────────────────────────── */
-    document.querySelectorAll('.example-chip').forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        var input = document.getElementById('searchInput');
-        if (input) {
-          input.value = chip.getAttribute('data-query') || '';
-          input.focus();
-        }
+    /* 8. SEARCH → CATEGORIES redirect */
+    var searchBtn = document.getElementById('searchBtn');
+    var searchIn  = document.getElementById('searchInput');
+    if(searchBtn && searchIn){
+      function doSearch(){
+        var q = searchIn.value.trim();
+        if(!q){ searchIn.focus(); return; }
+        window.location.href='categories.html?q='+encodeURIComponent(q);
+      }
+      searchBtn.addEventListener('click', doSearch);
+      searchIn.addEventListener('keydown', function(e){ if(e.key==='Enter') doSearch(); });
+    }
+
+    /* 9. EXAMPLE CHIPS */
+    document.querySelectorAll('.chip-example').forEach(function(c){
+      c.addEventListener('click', function(){
+        var inp=document.getElementById('searchInput');
+        if(inp){ inp.value=c.getAttribute('data-q')||''; inp.focus(); }
       });
     });
 
-    /* ── 7. SEARCH BUTTON ─────────────────────────────────── */
-    var searchBtn   = document.getElementById('searchBtn');
-    var searchInput = document.getElementById('searchInput');
-    if (searchBtn && searchInput) {
-      function doSearch() {
-        var q = searchInput.value.trim();
-        if (!q) { searchInput.focus(); return; }
-        // In production this navigates to a results page
-        window.location.href = 'categories.html?q=' + encodeURIComponent(q);
-      }
-      searchBtn.addEventListener('click', doSearch);
-      searchInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') doSearch();
+    /* 10. FAQ ACCORDION */
+    document.querySelectorAll('.faq-q').forEach(function(q){
+      q.addEventListener('click', function(){
+        var item = q.closest('.faq-item');
+        if(!item) return;
+        var open = item.classList.contains('open');
+        item.parentElement.querySelectorAll('.faq-item.open').forEach(function(i){ i.classList.remove('open'); });
+        if(!open) item.classList.add('open');
       });
-    }
+    });
 
-    /* ── 8. COUNTER ANIMATION ─────────────────────────────── */
-    var counters = document.querySelectorAll('.count-up');
-    if (counters.length && 'IntersectionObserver' in window) {
-      counters.forEach(function (el) {
-        var target = parseInt(el.getAttribute('data-target'), 10) || 0;
-        var obs = new IntersectionObserver(function (entries) {
-          if (!entries[0].isIntersecting) return;
-          obs.unobserve(el);
-          var start = null;
-          var duration = 1800;
-          function step(ts) {
-            if (!start) start = ts;
-            var progress = Math.min((ts - start) / duration, 1);
-            var ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-            el.textContent = Math.floor(ease * target).toLocaleString();
-            if (progress < 1) requestAnimationFrame(step);
-            else el.textContent = target.toLocaleString();
-          }
-          requestAnimationFrame(step);
-        }, { threshold: 0.5 });
-        obs.observe(el);
+    /* 11. FILTER BUTTONS (categories / global resources) */
+    document.querySelectorAll('[data-filter-group]').forEach(function(group){
+      var gname = group.getAttribute('data-filter-group');
+      group.querySelectorAll('[data-filter]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          group.querySelectorAll('[data-filter]').forEach(function(b){ b.classList.remove('active'); });
+          btn.classList.add('active');
+          var val = btn.getAttribute('data-filter');
+          document.querySelectorAll('[data-filterable="'+gname+'"]').forEach(function(el){
+            var cat = el.getAttribute('data-cat')||'';
+            el.style.display = (val==='all' || cat===val) ? '' : 'none';
+          });
+        });
       });
-    }
+    });
 
-    /* ── 9. FORM INTERCEPT ────────────────────────────────── */
-    document.querySelectorAll('form.hm-form').forEach(function (form) {
-      var submitBtn = form.querySelector('[type="submit"]');
-      if (submitBtn) submitBtn.setAttribute('data-label', submitBtn.textContent);
-
-      form.addEventListener('submit', function (e) {
+    /* 12. FORM INTERCEPT */
+    document.querySelectorAll('form.hm-form').forEach(function(form){
+      var btn = form.querySelector('[type="submit"]');
+      if(btn) btn.setAttribute('data-orig', btn.textContent);
+      form.addEventListener('submit', function(e){
         e.preventDefault();
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Sending…';
-        }
-        setTimeout(function () {
-          // Hide form, show success message if present
-          var success = document.getElementById(form.getAttribute('data-success'));
-          if (success) {
-            form.style.display = 'none';
-            success.style.display = 'flex';
-          } else {
-            // Fallback: show inline confirmation
-            var conf = form.querySelector('.hm-form-confirmation');
-            if (conf) conf.style.display = 'block';
-          }
+        if(btn){ btn.disabled=true; btn.textContent='Sending…'; }
+        setTimeout(function(){
+          var sid = form.getAttribute('data-success');
+          var sEl = sid ? document.getElementById(sid) : null;
+          if(sEl){ form.style.display='none'; sEl.style.display='flex'; }
           form.reset();
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = submitBtn.getAttribute('data-label') || 'Submit';
-          }
+          if(btn){ btn.disabled=false; btn.textContent=btn.getAttribute('data-orig')||'Submit'; }
         }, 1000);
       });
     });
 
-    /* ── 10. FAQ ACCORDION ────────────────────────────────── */
-    document.querySelectorAll('.faq-q, .faq-mini-q').forEach(function (q) {
-      q.addEventListener('click', function () {
-        var item = q.closest('.faq-item, .faq-mini-item');
-        if (!item) return;
-        var isOpen = item.classList.contains('open');
-        // Close all in same container
-        var container = item.parentElement;
-        container.querySelectorAll('.faq-item.open, .faq-mini-item.open').forEach(function (i) {
-          i.classList.remove('open');
-        });
-        if (!isOpen) item.classList.add('open');
-      });
-    });
+  } /* end init */
 
-    /* ── 11. SMOOTH HASH SCROLL (offset for fixed nav) ────── */
-    document.querySelectorAll('a[href*="#"]').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        var href = a.getAttribute('href');
-        if (!href) return;
-        var parts  = href.split('#');
-        var pagePart = parts[0];
-        var hash   = parts[1];
-        if (!hash) return;
-        // Same-page hash
-        if (!pagePart || pagePart === page) {
-          var target = document.getElementById(hash);
-          if (target) {
-            e.preventDefault();
-            var offset = (navbar ? navbar.offsetHeight : 72) + 16;
-            var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-            window.scrollTo({ top: top, behavior: 'smooth' });
-          }
-        }
-      });
-    });
-
-    /* ── 12. COUNTRY TAB SWITCHER (global-resources page) ─── */
-    document.querySelectorAll('.region-tab, .country-tab').forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        var group = tab.closest('.region-tabs, .country-tabs');
-        if (group) {
-          group.querySelectorAll('.region-tab, .country-tab').forEach(function (t) {
-            t.classList.remove('active');
-          });
-        }
-        tab.classList.add('active');
-
-        var filter = tab.getAttribute('data-region') || tab.textContent.trim().toLowerCase();
-        document.querySelectorAll('.country-card').forEach(function (c) {
-          var r = (c.getAttribute('data-region') || '').toLowerCase();
-          c.style.display = (filter === 'all' || r === filter) ? '' : 'none';
-        });
-      });
-    });
-
-    /* ── 13. CATEGORY FILTER (categories page) ─────────────── */
-    document.querySelectorAll('.filter-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var f = btn.getAttribute('data-filter') || 'all';
-        document.querySelectorAll('.cat-full').forEach(function (c) {
-          c.style.display = (f === 'all' || c.getAttribute('data-category') === f) ? '' : 'none';
-        });
-      });
-    });
-
-  } /* end init() */
-
-  /* Run after DOM + layout.js injection ─────────────────────── */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); }
+  else { init(); }
 })();
+EOF
+echo "main.js: $(wc -c < /mnt/user-data/outputs/human-mirror/assets/js/main.js) bytes"
