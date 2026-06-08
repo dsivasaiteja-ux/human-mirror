@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Human Mirror — Connecting Every Human To The Help They Need. Find trusted support, resources, and guidance — free, anywhere in the world.">
+<meta property="og:title" content="Human Mirror — Connecting Every Human To The Help They Need">
+<meta property="og:description" content="Find trusted support, resources, guidance, and protection — wherever you are in the world.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://humanmirror.fyi/">
+<meta property="og:image" content="https://humanmirror.fyi/assets/images/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@HumanMirroryfi">
+<title>Human Mirror — Connecting Every Human To The Help They Need</title>
+<link rel="icon" type="image/png" href="assets/images/logo.png">
+<link rel="canonical" href="https://humanmirror.fyi/">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+/* HOME-ONLY STYLES */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--nav-h) + 60px) 24px 80px;position:relative;overflow:hidden;background:var(--cream);}
+.hero-bg{position:absolute;inset:0;pointer-events:none;}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(11,30,61,.06) 1px,transparent 1px);background-size:42px 42px;opacity:.45;}
+.hero-c1{position:absolute;top:-200px;right:-200px;width:660px;height:660px;border-radius:50%;background:radial-gradient(circle,rgba(58,125,35,.055) 0%,transparent 70%);}
+.hero-c2{position:absolute;bottom:-220px;left:-220px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(11,30,61,.04) 0%,transparent 70%);}
+.hero-inner{position:relative;z-index:1;max-width:820px;}
+.hero-logo{width:160px;height:160px;object-fit:contain;border-radius:50%;background:#fff;margin:0 auto 28px;filter:drop-shadow(0 6px 24px rgba(11,30,61,.12));}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:var(--green-pale);color:var(--green);font-size:10.5px;font-weight:500;padding:5px 16px;border-radius:50px;border:1px solid rgba(58,125,35,.18);margin-bottom:16px;letter-spacing:1px;text-transform:uppercase;}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green-light);animation:blink 2s infinite;}
+.hero-rli{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:16px;}
+.hero-rli span{font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+.hero-rli .dot{width:4px;height:4px;border-radius:50%;background:var(--gold);}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(34px,5.5vw,66px);font-weight:600;line-height:1.08;letter-spacing:-2px;color:var(--navy);margin-bottom:20px;}
+.hero h1 em{font-style:italic;color:var(--green-mid);font-weight:300;}
+.hero-sub{font-size:clamp(15px,1.8vw,18px);color:var(--muted);line-height:1.7;max-width:540px;margin:0 auto 44px;font-weight:300;}
+/* SEARCH */
+.search-wrap{width:100%;max-width:640px;margin:0 auto;}
+.search-box{display:flex;align-items:center;background:#fff;border:1.5px solid var(--border);border-radius:100px;padding:6px 6px 6px 24px;box-shadow:var(--shadow-md);transition:border-color .2s,box-shadow .2s;gap:10px;}
+.search-box:focus-within{border-color:var(--green-mid);box-shadow:var(--shadow-md),0 0 0 4px rgba(58,125,35,.09);}
+.search-icon{width:19px;height:19px;color:var(--muted);flex-shrink:0;}
+.search-input{flex:1;border:none;outline:none;font-size:15px;font-weight:300;color:var(--navy);background:transparent;padding:9px 0;min-width:0;}
+.search-input::placeholder{color:rgba(107,122,153,.6);}
+.search-btn{background:var(--navy);color:#fff;border:none;border-radius:50px;padding:13px 28px;font-size:14.5px;font-weight:500;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;gap:7px;white-space:nowrap;flex-shrink:0;}
+.search-btn:hover{background:var(--navy-mid);transform:scale(1.02);}
+.chips{margin-top:17px;display:flex;flex-wrap:wrap;gap:7px;justify-content:center;}
+.chip-example{background:#fff;color:var(--muted);font-size:12.5px;font-weight:400;padding:6px 15px;border-radius:50px;border:1px solid var(--border);cursor:pointer;transition:all .2s;box-shadow:var(--shadow-sm);}
+.chip-example:hover{background:var(--navy);color:#fff;border-color:var(--navy);transform:translateY(-1px);}
+.loc-hint{margin-top:13px;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;}
+.loc-dot{width:7px;height:7px;border-radius:50%;background:var(--green-light);animation:blink 2s infinite;}
+/* CATEGORY GRID */
+.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+.cat-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:24px 18px;cursor:pointer;transition:all .25s;text-align:left;position:relative;overflow:hidden;text-decoration:none;display:block;}
+.cat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--cc,var(--green-mid));transform:scaleX(0);transition:transform .25s;transform-origin:left;}
+.cat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:transparent;}
+.cat-card:hover::after{transform:scaleX(1);}
+.cat-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:20px;background:var(--cb,var(--green-pale));}
+.cat-name{font-size:13.5px;font-weight:500;color:var(--navy);margin-bottom:3px;}
+.cat-sub{font-size:11.5px;color:var(--muted);}
+/* HOW SECTION */
+.how-section{padding:76px 40px;background:var(--navy);color:#fff;position:relative;overflow:hidden;}
+.how-bg{position:absolute;inset:0;background-image:radial-gradient(circle at 80% 50%,rgba(58,125,35,.09) 0%,transparent 60%);pointer-events:none;}
+.how-section .s-tag{color:rgba(76,175,48,.9);}
+.how-section .s-title{color:#fff;}
+.how-section .s-desc{color:rgba(255,255,255,.5);}
+.how-steps{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;z-index:1;}
+.step-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:28px 22px;transition:background .2s;}
+.step-card:hover{background:rgba(255,255,255,.09);}
+.step-num{font-family:'Fraunces',serif;font-size:48px;font-weight:600;color:rgba(255,255,255,.07);line-height:1;margin-bottom:14px;letter-spacing:-2px;}
+.step-ico{width:44px;height:44px;background:rgba(58,125,35,.25);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px;}
+.step-title{font-size:16px;font-weight:500;color:#fff;margin-bottom:8px;}
+.step-desc{font-size:13px;color:rgba(255,255,255,.48);line-height:1.65;font-weight:300;}
+/* PILOT COUNTRIES */
+.country-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.country-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:all .25s;}
+.country-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);}
+.country-card-head{padding:24px 24px 16px;display:flex;align-items:center;gap:14px;}
+.country-flag{font-size:36px;}
+.country-name{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--navy);letter-spacing:-.5px;}
+.country-sub{font-size:12px;color:var(--muted);}
+.country-body{padding:0 24px 24px;display:flex;flex-direction:column;gap:9px;}
+.country-footer{padding:14px 24px;border-top:1px solid var(--border);}
+/* EMG BAR */
+.emg-bar{padding:32px 40px;background:#FFF5F5;border-top:1px solid #FED7D7;border-bottom:1px solid #FED7D7;}
+.emg-bar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.emg-icon-box{width:48px;height:48px;background:var(--red);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;animation:pulse-red 2.5s infinite;flex-shrink:0;}
+.emg-title{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:#991B1B;margin-bottom:3px;}
+.emg-desc{font-size:13px;color:#B91C1C;font-weight:300;}
+.emg-actions{display:flex;gap:11px;flex-wrap:wrap;}
+/* AI TEASER */
+.ai-wrap{background:linear-gradient(135deg,var(--navy) 0%,#2B4F8C 100%);border-radius:var(--r-lg);padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden;}
+.ai-glow{position:absolute;top:-80px;right:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(58,125,35,.15) 0%,transparent 70%);pointer-events:none;}
+.ai-content{position:relative;z-index:1;}
+.ai-tag{font-size:10.5px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(76,175,48,.9);margin-bottom:18px;display:block;}
+.ai-title{font-family:'Fraunces',serif;font-size:clamp(26px,3.5vw,34px);font-weight:600;color:#fff;letter-spacing:-1.3px;line-height:1.2;margin-bottom:14px;}
+.ai-title em{font-style:italic;font-weight:300;color:rgba(76,175,48,.9);}
+.ai-desc{font-size:15px;color:rgba(255,255,255,.52);line-height:1.7;font-weight:300;margin-bottom:26px;}
+.ai-feats{display:flex;flex-direction:column;gap:10px;}
+.ai-feat{display:flex;align-items:center;gap:10px;font-size:13.5px;color:rgba(255,255,255,.72);}
+.ai-feat-dot{width:5px;height:5px;border-radius:50%;background:var(--green-light);flex-shrink:0;}
+.ai-demo{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:24px;position:relative;z-index:1;}
+.chat{display:flex;flex-direction:column;gap:14px;}
+.chat-msg{display:flex;gap:10px;align-items:flex-start;}
+.chat-msg.user{flex-direction:row-reverse;}
+.chat-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.chat-msg.ai .chat-av{background:rgba(58,125,35,.3);}
+.chat-msg.user .chat-av{background:rgba(255,255,255,.12);}
+.chat-bub{padding:11px 15px;border-radius:13px;font-size:13px;line-height:1.55;max-width:240px;}
+.chat-msg.ai .chat-bub{background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);border-radius:4px 13px 13px 13px;}
+.chat-msg.user .chat-bub{background:var(--green-mid);color:#fff;border-radius:13px 4px 13px 13px;}
+.typing{display:flex;gap:4px;padding:13px 15px;background:rgba(255,255,255,.08);border-radius:4px 13px 13px 13px;width:fit-content;}
+.typing span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);animation:typeBounce 1.4s infinite;}
+.typing span:nth-child(2){animation-delay:.2s;}
+.typing span:nth-child(3){animation-delay:.4s;}
+@keyframes typeBounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-6px);opacity:1}}
+/* CTA */
+.cta-section{padding:76px 40px;background:var(--navy);text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(58,125,35,.1) 0%,transparent 65%);}
+.cta-inner{position:relative;z-index:1;max-width:580px;margin:0 auto;}
+.cta-logo{width:72px;height:72px;object-fit:contain;border-radius:50%;background:#fff;margin:0 auto 20px;}
+.cta-title{font-family:'Fraunces',serif;font-size:clamp(30px,4.5vw,48px);font-weight:600;color:#fff;letter-spacing:-1.8px;margin-bottom:16px;line-height:1.1;}
+.cta-title em{font-style:italic;color:rgba(76,175,48,.9);font-weight:300;}
+.cta-sub{font-size:16px;color:rgba(255,255,255,.48);font-weight:300;margin-bottom:32px;line-height:1.65;}
+.cta-btns{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;}
+/* STATS GRID */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+/* PILOT STATUS BANNER */
+.pilot-banner{background:var(--green-pale);border:1px solid rgba(58,125,35,.2);border-radius:var(--r);padding:18px 24px;display:flex;align-items:flex-start;gap:13px;margin-bottom:36px;}
+.pilot-icon{font-size:22px;flex-shrink:0;}
+.pilot-text{font-size:13.5px;color:var(--green);line-height:1.6;font-weight:300;}
+.pilot-text strong{font-weight:600;color:var(--navy);}
+
+@media(max-width:1024px){.cat-grid{grid-template-columns:repeat(3,1fr);}.how-steps{grid-template-columns:repeat(2,1fr);}.stats-grid{grid-template-columns:repeat(2,1fr);}.country-cards{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.hero{padding:calc(var(--nav-h)+44px) 20px 60px;}.hero-logo{width:120px;height:120px;}.cat-grid{grid-template-columns:repeat(2,1fr);}.how-section{padding:56px 20px;}.how-steps{grid-template-columns:1fr;}.ai-wrap{grid-template-columns:1fr;padding:36px 22px;gap:32px;}.ai-title{font-size:26px;}.emg-bar{padding:24px 20px;}.emg-bar-inner{flex-direction:column;align-items:flex-start;}.country-cards{grid-template-columns:1fr;}.cta-btns{flex-direction:column;align-items:center;}.stats-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.cat-grid{grid-template-columns:1fr 1fr;}.search-box{border-radius:16px;padding:10px 14px;flex-direction:column;gap:8px;}.search-btn{width:100%;justify-content:center;}}
+</style>
+</head>
+<body>
+<div id="hm-nav"></div>
+<main id="main-content">
+
+<!-- HERO -->
+<section class="hero" id="search">
+  <div class="hero-bg"><div class="hero-dots"></div><div class="hero-c1"></div><div class="hero-c2"></div></div>
+  <div class="hero-inner">
+    <img class="hero-logo ah" src="assets/images/logo.png" alt="Human Mirror — Reflect. Learn. Improve." width="160" height="160"/>
+    <div class="hero-rli ah1">
+      <span>Reflect</span><div class="dot"></div><span>Learn</span><div class="dot"></div><span>Improve</span>
+    </div>
+    <div class="hero-badge ah1">Global Digital Public Service Platform</div>
+    <h1 class="ah2">Connecting <em>Every Human</em><br>To The Help They Need.</h1>
+    <p class="hero-sub ah3">Find trusted support, resources, guidance, and protection — wherever you are in the world. Free. Always.</p>
+    <div class="search-wrap ah3">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Describe your problem… e.g. I need mental health support" aria-label="Search for help"/>
+        <button class="search-btn" id="searchBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          Find Help
+        </button>
+      </div>
+      <div class="chips">
+        <span class="chip-example" data-q="I am being blackmailed online">Blackmail / Cybercrime</span>
+        <span class="chip-example" data-q="I need mental health support">Mental Health</span>
+        <span class="chip-example" data-q="My child is missing">Missing Child</span>
+        <span class="chip-example" data-q="I need career guidance">Career Guidance</span>
+        <span class="chip-example" data-q="I need legal help">Legal Help</span>
+        <span class="chip-example" data-q="I am struggling with addiction">Addiction</span>
+      </div>
+      <div class="loc-hint"><div class="loc-dot"></div><span id="loc-hint">Detecting your location for relevant resources…</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar reveal">
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Private &amp; Confidential</div>
+  <div class="trust-div"></div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Verified Resources Only</div>
+  <div class="trust-div"></div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Available 24/7</div>
+  <div class="trust-div"></div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Location-Aware</div>
+  <div class="trust-div"></div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Free for Everyone</div>
+</div>
+
+<!-- PILOT COUNTRIES -->
+<section class="s" style="background:var(--white)">
+  <div class="s-w">
+    <div class="s-head reveal">
+      <div class="s-tag">Pilot Countries — MVP Launch</div>
+      <h2 class="s-title">Starting with <em>India, UAE &amp; USA</em></h2>
+      <p class="s-desc">Human Mirror is launching with verified, real resources for our three pilot countries — growing from there.</p>
+    </div>
+    <div class="pilot-banner reveal">
+      <div class="pilot-icon">🌱</div>
+      <div class="pilot-text"><strong>Building Global Coverage:</strong> Human Mirror is in its MVP phase. We are starting with real, verified resources for India, UAE, and USA — and expanding country by country. We never show fake numbers.</div>
+    </div>
+    <div class="country-cards">
+      <div class="country-card reveal">
+        <div class="country-card-head"><div class="country-flag">🇮🇳</div><div><div class="country-name">India</div><div class="country-sub">Emergency · Mental Health · Child Safety · Legal Aid</div></div></div>
+        <div class="country-body">
+          <a href="tel:112" class="res-card"><div class="res-card-left"><div class="res-dot" style="background:#DC2626"></div><div><div class="res-name">National Emergency</div><div class="res-meta">All emergencies • 24/7</div></div></div><span class="res-action">112 →</span></a>
+          <a href="tel:1098" class="res-card"><div class="res-card-left"><div class="res-dot" style="background:#DC2626"></div><div><div class="res-name">Childline India</div><div class="res-meta">Child protection • Free • 24/7</div></div></div><span class="res-action">1098 →</span></a>
+          <a href="tel:181" class="res-card"><div class="res-card-left"><div class="res-dot" style="background:#DB2777"></div><div><div class="res-name">Women Helpline</div><div class="res-meta">Women's safety • Free</div></div></div><span class="res-action">181 →</span></a>
+          <a href="tel:1930" class="res-card"><div class="res-card-left"><div class="res-dot" style="background:#0284C7"></div><div><div class="res-name">Cybercrime Helpline</div><div class="res-meta">Online fraud & cybercrime</div></div></div><span class="res-action">1930 →</span></a>
+        </div>
+        <div class="country-footer"><a href="global-resources.html#india" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">All India Resources →</a></div>
+      </div>
+      <div class="country-card reveal rd1">
+        <div class="country-card-head"><div class="country-flag">🇦🇪</div><div><div class="country-name">UAE</div><div class="country-sub">Emergency · Child Safety · Mental Health · Government</div></div></div>
+        <div class="country-body">
+          <a href="tel:999" class="res-card"><div class="res-card-left"><div class="res-dot" style="background:#DC2626"></div><div><div class="res-name">National Emergency</div><div class="res-meta">Police, Ambulance, Fire • 24/7</div></div></div><span class="res-action">999 →</span></a>
+          <a href="tel:800CHILD" class="res-card"><div class="res-card-left"><div class="res-dot" style="background:#DC2626"></div><div><div class="res-name">Child Protection</div><div class="res-meta">Ministry of Interior • Free</div></div></div><span class="res-action">800-CHILD →</span></a>
+          <a href="tel:8004673" class="res-card"><div class="res-card-left"><div class="res-dot" style="background:#7C3AED"></div><div><div class="res-name">Aman Social Support</div><div class="res-meta">Mental health & social services</div></div></div><span class="res-action">800-HOPE →</span></a>
+          <a href="https://www.mcd.gov.ae" target="_blank" rel="noopener" class="res-card"><div class="res-card-left"><div class="res-dot" style="background:#0D9488"></div><div><div class="res-name">Ministry of Community Dev.</div><div class="res-meta">Social support services</div></div></div><span class="res-action">Visit →</span></a>
+        </div>
+        <div class="country-footer"><a href="global-resources.html#uae" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">All UAE Resources →</a></div>
+      </div>
+      <div class="country-card reveal rd2">
+        <div class="country-card-head"><div class="country-flag">🇺🇸</div><div><div class="country-name">USA</div><div class="country-sub">Emergency · Crisis Lines · Community Services</div></div></div>
+        <div class="country-body">
+          <a href="tel:911" class="res-card"><div class="res-card-left"><div class="res-dot" style="background:#DC2626"></div><div><div class="res-name">National Emergency</div><div class="res-meta">Police, Ambulance, Fire • 24/7</div></div></div><span class="res-action">911 →</span></a>
+          <a href="tel:988" class="res-card"><div class="res-card-left"><div class="res-dot" style="background:#7C3AED"></div><div><div class="res-name">988 Suicide &amp; Crisis Lifeline</div><div class="res-meta">Call or text • Free • 24/7</div></div></div><span class="res-action">988 →</span></a>
+          <a href="tel:211" class="res-card"><div class="res-card-left"><div class="res-dot" style="background:#0D9488"></div><div><div class="res-name">211 Community Services</div><div class="res-meta">Health, housing, food, crisis</div></div></div><span class="res-action">211 →</span></a>
+          <a href="tel:18007997233" class="res-card"><div class="res-card-left"><div class="res-dot" style="background:#DB2777"></div><div><div class="res-name">National DV Hotline</div><div class="res-meta">Domestic violence • Free • 24/7</div></div></div><span class="res-action">1-800-799-7233 →</span></a>
+        </div>
+        <div class="country-footer"><a href="global-resources.html#usa" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">All USA Resources →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="s" style="background:var(--cream)">
+  <div class="s-ww">
+    <div class="s-head reveal">
+      <div class="s-tag">Help Categories</div>
+      <h2 class="s-title">Whatever you're facing,<br><em>we have a path forward.</em></h2>
+      <p class="s-desc">Ten essential areas of human need — each with verified resources and expert guidance.</p>
+    </div>
+    <div class="cat-grid">
+      <a href="categories.html#child-protection" class="cat-card reveal" style="--cc:#DC2626;--cb:#FFF5F5;"><div class="cat-icon">🛡️</div><div class="cat-name">Child Protection</div><div class="cat-sub">Safety &amp; abuse support</div></a>
+      <a href="categories.html#womens-safety" class="cat-card reveal rd1" style="--cc:#DB2777;--cb:#FDF2F8;"><div class="cat-icon">💜</div><div class="cat-name">Women's Safety</div><div class="cat-sub">Domestic violence &amp; rights</div></a>
+      <a href="categories.html#mental-health" class="cat-card reveal rd2" style="--cc:#7C3AED;--cb:#F5F3FF;"><div class="cat-icon">🧠</div><div class="cat-name">Mental Health</div><div class="cat-sub">Counselling &amp; crisis support</div></a>
+      <a href="categories.html#education" class="cat-card reveal rd3" style="--cc:#2563EB;--cb:#EFF6FF;"><div class="cat-icon">📚</div><div class="cat-name">Education</div><div class="cat-sub">Learning &amp; scholarships</div></a>
+      <a href="categories.html#career-guidance" class="cat-card reveal rd4" style="--cc:#0D9488;--cb:#F0FDFA;"><div class="cat-icon">💼</div><div class="cat-name">Career Guidance</div><div class="cat-sub">Jobs &amp; skill development</div></a>
+      <a href="categories.html#legal-assistance" class="cat-card reveal" style="--cc:#D97706;--cb:#FFFBEB;"><div class="cat-icon">⚖️</div><div class="cat-name">Legal Resources</div><div class="cat-sub">Rights &amp; legal aid</div></a>
+      <a href="categories.html#digital-safety" class="cat-card reveal rd1" style="--cc:#0284C7;--cb:#F0F9FF;"><div class="cat-icon">🔒</div><div class="cat-name">Digital Safety</div><div class="cat-sub">Cybercrime &amp; online harm</div></a>
+      <a href="categories.html#addiction-recovery" class="cat-card reveal rd2" style="--cc:#16A34A;--cb:#F0FDF4;"><div class="cat-icon">🌱</div><div class="cat-name">Addiction Recovery</div><div class="cat-sub">Substance &amp; behavioural</div></a>
+      <a href="categories.html#human-values" class="cat-card reveal rd3" style="--cc:#8B6914;--cb:#FEFCE8;"><div class="cat-icon">🌟</div><div class="cat-name">Human Values</div><div class="cat-sub">Wellbeing &amp; purpose</div></a>
+      <a href="categories.html#emergency-support" class="cat-card reveal rd4" style="--cc:#DC2626;--cb:#FFF5F5;"><div class="cat-icon">🚨</div><div class="cat-name">Emergency Support</div><div class="cat-sub">Crisis &amp; disaster relief</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="how-bg"></div>
+  <div class="s-head reveal">
+    <div class="s-tag">How It Works</div>
+    <h2 class="s-title">From confusion <em>to clarity</em><br>in minutes.</h2>
+    <p class="s-desc">Human Mirror guides you step by step — from your problem to the right solution.</p>
+  </div>
+  <div class="how-steps">
+    <div class="step-card reveal"><div class="step-num">01</div><div class="step-ico">💬</div><div class="step-title">Describe Your Situation</div><div class="step-desc">Type what you're going through in plain language. No judgment. No forms.</div></div>
+    <div class="step-card reveal rd1"><div class="step-num">02</div><div class="step-ico">🧭</div><div class="step-title">We Understand Your Need</div><div class="step-desc">Human Mirror categorises your situation and identifies the type of help required.</div></div>
+    <div class="step-card reveal rd2"><div class="step-num">03</div><div class="step-ico">🔍</div><div class="step-title">Find Trusted Resources</div><div class="step-desc">Get matched with verified helplines, organisations, and services near you.</div></div>
+    <div class="step-card reveal rd3"><div class="step-num">04</div><div class="step-ico">📞</div><div class="step-title">Take Action</div><div class="step-desc">Connect directly — call, visit, or access support with one tap.</div></div>
+  </div>
+  <div style="text-align:center;margin-top:40px;position:relative;z-index:1;">
+    <a href="how-it-works.html" class="btn btn-outline-w">See the Full Process →</a>
+  </div>
+</section>
+
+<!-- AI NAVIGATOR TEASER -->
+<section class="s" style="background:var(--white)">
+  <div class="s-w">
+    <div class="ai-wrap reveal">
+      <div class="ai-glow"></div>
+      <div class="ai-content">
+        <span class="ai-tag">✦ Human Problem Navigator</span>
+        <h2 class="ai-title">You don't have to<br><em>figure it out alone.</em></h2>
+        <p class="ai-desc">Tell Human Mirror what you're going through — in your own words — and we'll navigate you to the right help. No forms. No jargon.</p>
+        <div class="ai-feats">
+          <div class="ai-feat"><div class="ai-feat-dot"></div>Understands emotional, informal language</div>
+          <div class="ai-feat"><div class="ai-feat-dot"></div>Maps your problem to the right category</div>
+          <div class="ai-feat"><div class="ai-feat-dot"></div>Surfaces locally-relevant, verified resources</div>
+          <div class="ai-feat"><div class="ai-feat-dot"></div>Private — no data stored, no account needed</div>
+        </div>
+      </div>
+      <div class="ai-demo">
+        <div class="chat">
+          <div class="chat-msg user"><div class="chat-av">👤</div><div class="chat-bub">I am being blackmailed online and I don't know what to do.</div></div>
+          <div class="chat-msg ai"><div class="chat-av">🌿</div><div class="chat-bub">I understand — this is a serious situation and you are right to seek help. Are you in India, UAE, or another country?</div></div>
+          <div class="chat-msg user"><div class="chat-av">👤</div><div class="chat-bub">India.</div></div>
+          <div class="chat-msg ai"><div class="chat-av">🌿</div><div class="chat-bub">Here are your immediate steps: Report to Cybercrime Helpline 1930 (free, 24/7) and file at cybercrime.gov.in. Do not pay the blackmailer.</div></div>
+          <div class="chat-msg ai"><div class="chat-av"></div><div class="typing"><span></span><span></span><span></span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCY BAR -->
+<div class="emg-bar" id="emergency-bar">
+  <div class="emg-bar-inner">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <div class="emg-icon-box">🚨</div>
+      <div><div class="emg-title">In Immediate Danger?</div><div class="emg-desc">If you or someone you know is at risk — act now. Do not wait.</div></div>
+    </div>
+    <div class="emg-actions">
+      <a href="emergency.html" class="btn btn-red">🚨 Emergency Resources</a>
+      <a href="emergency.html#numbers" class="btn btn-outline" style="border-color:#DC2626;color:#DC2626;">Find Local Emergency Numbers</a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <img class="cta-logo" src="assets/images/logo.png" alt="Human Mirror" width="72" height="72"/>
+    <h2 class="cta-title">The help you need<br>is <em>one search away.</em></h2>
+    <p class="cta-sub">Free. Private. No account needed. Available 24/7. For every human, everywhere.</p>
+    <div class="cta-btns">
+      <a href="#search" class="btn btn-green btn-lg">Find Help Now</a>
+      <a href="categories.html" class="btn btn-outline-w btn-lg">Browse All Categories</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<div id="hm-footer"></div>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
